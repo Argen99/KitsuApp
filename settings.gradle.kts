@@ -13,4 +13,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "KitsuApp"
-include ':app'
+include (":app")
+include (":data")
+include (":domain")
