@@ -1,4 +1,4 @@
-package com.example.kitsuapp.di
+package com.example.domain.di
 
 import com.example.domain.repository.MainRepository
 import com.example.domain.use_cases.GetAnimeUseCase

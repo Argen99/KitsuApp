@@ -1,4 +1,4 @@
-package com.example.data.remote
+package com.example.data.di
 
 import com.example.data.remote.api_service.ApiService
 import com.example.data.remote.repository.MainRepositoryImpl

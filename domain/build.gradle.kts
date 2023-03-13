@@ -12,4 +12,5 @@ dependencies {
     implementation(Dependencies.Coroutines.core)
     implementation(Dependencies.Paging.pagingCommon)
     implementation(Dependencies.Retrofit.retrofit)
+    implementation(Dependencies.Koin.koinCore)
 }
