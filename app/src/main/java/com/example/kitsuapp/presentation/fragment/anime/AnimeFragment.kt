@@ -1,7 +1,9 @@
 package com.example.kitsuapp.presentation.fragment.anime
 
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.paging.map
 import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -10,6 +12,7 @@ import com.example.kitsuapp.core.base.BaseFragment
 import com.example.kitsuapp.databinding.FragmentAnimeBinding
 import com.example.kitsuapp.model.mappers.toUI
 import com.example.kitsuapp.presentation.adapter.AnimePagingAdapter
+import com.example.kitsuapp.presentation.adapter.DefaultLoadStateAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,7 +28,7 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding,AnimeViewModel>(R.layout
     override fun initialize() {
         binding.rvAnime.apply {
             layoutManager =  GridLayoutManager(requireContext(), 2)
-            adapter = animeAdapter
+            adapter = animeAdapter.withLoadStateFooter(DefaultLoadStateAdapter())
         }
     }
 
@@ -38,6 +41,10 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding,AnimeViewModel>(R.layout
 
         binding.etSearchAnime.addTextChangedListener {
             viewModel.searchBy(it.toString())
+        }
+
+        animeAdapter.addLoadStateListener { state ->
+            binding.pbAnime.isVisible = state.source.refresh is LoadState.Loading
         }
     }
 

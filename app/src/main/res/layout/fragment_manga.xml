@@ -1,42 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".presentation.fragment.manga.MangaFragment">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_search_manga"
-            android:layout_marginHorizontal="8dp"
-            android:hint="@string/search_manga"
-            style="@style/SearchStyle"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/btn_filter_manga"
-            android:src="@drawable/ic_filter"
-            android:backgroundTint="@android:color/transparent"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginEnd="20dp"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:contentDescription="@string/filter_button" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_search_manga"
+                style="@style/SearchStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:hint="@string/search_manga" />
 
-    </FrameLayout>
+            <ImageButton
+                android:id="@+id/btn_filter_manga"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="@android:color/transparent"
+                android:contentDescription="@string/filter_button"
+                android:src="@drawable/ic_filter" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_manga"
-        android:layout_marginTop="8dp"
-        android:paddingEnd="8dp"
-        android:paddingStart="16dp"
-        android:clipToPadding="false"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        </FrameLayout>
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_manga"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pb_manga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/orange"
+        android:visibility="gone" />
+
+</FrameLayout>

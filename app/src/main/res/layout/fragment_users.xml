@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".presentation.fragment.users.UsersFragment">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_search_user"
-        android:layout_marginHorizontal="8dp"
-        android:hint="@string/search_users"
-        style="@style/SearchStyle"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_users"
-        android:layout_marginTop="8dp"
-        tools:listitem="@layout/item_users"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_search_user"
+            style="@style/SearchStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:hint="@string/search_users" />
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_users"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            tools:listitem="@layout/item_users" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pb_users"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/orange"
+        android:visibility="gone" />
+
+</FrameLayout>
