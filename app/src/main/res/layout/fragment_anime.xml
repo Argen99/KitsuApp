@@ -25,11 +25,12 @@
 
             <ImageButton
                 android:id="@+id/btn_filter_anime"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:padding="42dp"
                 android:layout_gravity="center_vertical|end"
                 android:layout_marginEnd="20dp"
-                android:backgroundTint="@android:color/transparent"
+                android:backgroundTint="@color/white"
                 android:contentDescription="@string/filter_button"
                 android:src="@drawable/ic_filter" />
 
@@ -53,5 +54,11 @@
         android:layout_gravity="center"
         android:indeterminateTint="@color/orange"
         android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_gravity="center|bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>

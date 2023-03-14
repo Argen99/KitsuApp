@@ -14,11 +14,17 @@ val appModule = module {
     }
 
     viewModel<AnimeViewModel> {
-        AnimeViewModel(getAnimeUseCase = get())
+        AnimeViewModel(
+            getAnimeUseCase = get(),
+            getCategoriesUseCase = get()
+        )
     }
 
     viewModel<MangaViewModel> {
-        MangaViewModel(getMangaUseCase = get())
+        MangaViewModel(
+            getMangaUseCase = get(),
+            getCategoriesUseCase = get()
+        )
     }
 
     viewModel<UsersViewModel> {

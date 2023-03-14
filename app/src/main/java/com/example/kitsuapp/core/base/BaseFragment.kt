@@ -6,10 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.paging.PagingData
 import androidx.viewbinding.ViewBinding
 import com.example.kitsuapp.R
+import com.example.kitsuapp.core.ui_state.UIState
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel>(
     @LayoutRes private val layoutRes: Int
@@ -44,5 +52,29 @@ abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel>(
 
     protected fun navigateUp() {
         _navController?.navigateUp()
+    }
+    protected fun <T> StateFlow<UIState<T>>.collectState(
+        onLoading: () -> Unit,
+        onError: (message: String) -> Unit,
+        onSuccess: (data: T) -> Unit
+    ) {
+        viewLifecycleOwner.lifecycleScope.launch{
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                this@collectState.collect { state ->
+                    when (state) {
+                        is UIState.Loading -> {
+                            onLoading()
+                        }
+                        is UIState.Error -> {
+                            onError(state.message)
+                        }
+                        is UIState.Success -> {
+                            onSuccess(state.data)
+                        }
+                        is UIState.Empty -> {}
+                    }
+                }
+            }
+        }
     }
 }

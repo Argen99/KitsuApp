@@ -9,4 +9,7 @@
     <string name="search_users">Search Users</string>
     <string name="search_manga">Search Manga</string>
     <string name="filter_button">filter button</string>
+    <string name="categories">Categories</string>
+    <string name="reset">Reset</string>
+    <string name="apply">Apply</string>
 </resources>

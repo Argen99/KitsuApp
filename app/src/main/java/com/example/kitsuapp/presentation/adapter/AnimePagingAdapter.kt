@@ -2,10 +2,11 @@ package com.example.kitsuapp.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.CompoundButton
+import android.widget.RadioGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.domain.model.Data
 import com.example.kitsuapp.core.extension.loadImage
 import com.example.kitsuapp.databinding.ItemAnimeBinding
 import com.example.kitsuapp.model.DataUI
@@ -29,7 +30,6 @@ class AnimePagingAdapter(
 
         fun onBind(data: DataUI) = with(binding) {
             data.attributes?.posterImage?.original?.let { ivImage.loadImage(it) }
-            data.id?.let { textView.text = it }
         }
 
         init {

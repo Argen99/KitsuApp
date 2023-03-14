@@ -10,21 +10,29 @@ class AnimePagingSource(
     private val apiService: ApiService,
     private val getAnime: Boolean,
     private val text: String?,
-    ) : PagingSource<Int, Data>() {
+    private val categories: List<String>?,
+) : PagingSource<Int, Data>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Data> {
         val pageIndex = params.key ?: 0
 
         return try {
             val response = if (getAnime) {
-                apiService.getAnime(limit = params.loadSize, offset = pageIndex, text = text).toModel()
-            }else {
-                apiService.getManga(limit = params.loadSize, offset = pageIndex, text = text).toModel()
+                apiService.getAnime(
+                    limit = params.loadSize, offset = pageIndex, text = text,
+                    categories = categories
+                ).toModel()
+            } else {
+                apiService.getManga(
+                    limit = params.loadSize, offset = pageIndex, text = text,
+                    categories = categories
+                ).toModel()
             }
             LoadResult.Page(
                 data = response.data,
-                nextKey = if(response.data.size == params.loadSize) pageIndex + params.loadSize else null,
-                prevKey = null)
+                nextKey = if (response.data.size == params.loadSize) pageIndex + params.loadSize else null,
+                prevKey = null
+            )
 
         } catch (exception: Exception) {
             LoadResult.Error(exception)
