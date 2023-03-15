@@ -8,6 +8,7 @@ import com.example.data.remote.api_service.ApiService
 import com.example.data.remote.model.mappers.toDto
 import com.example.data.remote.model.mappers.toModel
 import com.example.data.remote.paging_src.AnimePagingSource
+import com.example.data.remote.paging_src.MangaPagingSource
 import com.example.data.remote.paging_src.UsersPagingSource
 import com.example.domain.common.Resource
 import com.example.domain.model.*
@@ -27,7 +28,7 @@ class MainRepositoryImpl(
             ),
             pagingSourceFactory = {
                 AnimePagingSource(
-                    apiService = apiService, true, text = text, categories = categories
+                    apiService = apiService, text = text, categories = categories
                 )
             }
         ).flow
@@ -41,8 +42,8 @@ class MainRepositoryImpl(
                 initialLoadSize = 10
             ),
             pagingSourceFactory = {
-                AnimePagingSource(
-                    apiService = apiService, false, text = text, categories = categories
+                MangaPagingSource(
+                    apiService = apiService, text = text, categories = categories
                 )
             }
         ).flow

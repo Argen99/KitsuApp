@@ -6,7 +6,7 @@ import com.example.data.remote.api_service.ApiService
 import com.example.data.remote.model.mappers.toModel
 import com.example.domain.model.Data
 
-class AnimePagingSource(
+class MangaPagingSource(
     private val apiService: ApiService,
     private val text: String?,
     private val categories: List<String>?,
@@ -16,7 +16,7 @@ class AnimePagingSource(
         val pageIndex = params.key ?: 0
 
         return try {
-            val response = apiService.getAnime(
+            val response = apiService.getManga(
                     limit = params.loadSize, offset = pageIndex, text = text,
                     categories = categories
                 ).toModel()
@@ -25,7 +25,6 @@ class AnimePagingSource(
                 nextKey = if (response.data.size == params.loadSize) pageIndex + params.loadSize else null,
                 prevKey = null
             )
-
         } catch (exception: Exception) {
             LoadResult.Error(exception)
         }
