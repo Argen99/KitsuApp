@@ -52,6 +52,6 @@ data class CategoriesLinksXXXUI(
     val related: String?,
 )
 
-data class CategoriesLinksUI (
+data class CategoriesLinksUI(
     val self: String?
 )

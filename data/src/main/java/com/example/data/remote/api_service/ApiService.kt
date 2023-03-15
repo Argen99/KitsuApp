@@ -1,10 +1,9 @@
 package com.example.data.remote.api_service
 
-import com.example.data.remote.model.AnimeResponseDto
-import com.example.data.remote.model.CategoriesDataDto
-import com.example.data.remote.model.CategoriesResponseDto
-import com.example.data.remote.model.UserResponseDto
+import com.example.data.remote.model.*
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ApiService {
@@ -14,7 +13,7 @@ interface ApiService {
         @Query("page[offset]") offset: Int,
         @Query("filter[text]") text: String?,
         @Query("filter[categories]") categories: List<String>?
-    ) : AnimeResponseDto
+    ): AnimeResponseDto
 
     @GET("api/edge/manga")
     suspend fun getManga(
@@ -22,16 +21,21 @@ interface ApiService {
         @Query("page[offset]") offset: Int,
         @Query("filter[text]") text: String?,
         @Query("filter[categories]") categories: List<String>?
-    ) : AnimeResponseDto
+    ): AnimeResponseDto
 
     @GET("api/edge/users")
     suspend fun getUsers(
         @Query("page[limit]") limit: Int,
         @Query("page[offset]") offset: Int
-    ) : UserResponseDto
+    ): UserResponseDto
 
     @GET("api/edge/categories")
     suspend fun getCategories(
         @Query("page[limit]") limit: Int
-    ) : CategoriesResponseDto
+    ): CategoriesResponseDto
+
+    @POST("api/oauth/token")
+    suspend fun login(
+        @Body loginRequestDto: LoginRequestDto
+    ): LoginResponseDto
 }

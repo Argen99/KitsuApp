@@ -14,6 +14,7 @@ val networkModule = module {
     factory { provideForecastApi(get()) }
     single { provideRetrofit(get()) }
 }
+
 fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
         .baseUrl(BASE_URL)
@@ -21,6 +22,7 @@ fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         .client(okHttpClient)
         .build()
 }
+
 fun provideOkHttpClient(): OkHttpClient {
     val interceptor = HttpLoggingInterceptor()
     interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -31,6 +33,7 @@ fun provideOkHttpClient(): OkHttpClient {
         .writeTimeout(10, TimeUnit.SECONDS)
         .build()
 }
+
 fun provideForecastApi(retrofit: Retrofit): ApiService {
     return retrofit.create(ApiService::class.java)
 }

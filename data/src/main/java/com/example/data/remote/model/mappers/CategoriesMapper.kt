@@ -35,7 +35,7 @@ fun CategoriesRelationshipsDto.toModel() = CategoriesRelationships(
 )
 
 fun CategoriesLinksXXDto.toModel() = CategoriesLinksXX(
-    links =links?.toModel()
+    links = links?.toModel()
 )
 
 fun CategoriesAttributesDto.toModel() = CategoriesAttributes(
@@ -94,7 +94,7 @@ fun CategoriesRelationships.toDto() = CategoriesRelationshipsDto(
 )
 
 fun CategoriesLinksXX.toDto() = CategoriesLinksXXDto(
-    links =links?.toDto()
+    links = links?.toDto()
 )
 
 fun CategoriesAttributes.toDto() = CategoriesAttributesDto(

@@ -5,5 +5,6 @@ import com.example.domain.repository.MainRepository
 class GetAnimeUseCase(
     private val repository: MainRepository
 ) {
-    operator fun invoke(text: String?, categories: List<String>?) = repository.getAnime(text, categories)
+    operator fun invoke(text: String?, categories: List<String>?) =
+        repository.getAnime(text, categories)
 }

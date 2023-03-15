@@ -3,8 +3,6 @@ package com.example.kitsuapp.presentation.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CompoundButton
-import android.widget.RadioGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.kitsuapp.databinding.ItemCategoriesBinding
@@ -12,7 +10,7 @@ import com.example.kitsuapp.model.CategoriesDataUI
 
 class CategoriesAdapter(
     private var list: List<CategoriesDataUI>
-): Adapter<CategoriesAdapter.CategoriesViewHolder>() {
+) : Adapter<CategoriesAdapter.CategoriesViewHolder>() {
 
     private val selectedItems = arrayListOf<String>()
 
@@ -59,7 +57,7 @@ class CategoriesAdapter(
                 data.attributes.isChecked = isChecked
                 if (data.attributes.isChecked) {
                     selectedItems.add(data.attributes.title)
-                } else  {
+                } else {
                     selectedItems.remove(data.attributes.title)
                 }
             }

@@ -1,4 +1,4 @@
-package com.example.domain.core.base
+package com.example.data.core.base
 
 import com.example.domain.common.Resource
 import kotlinx.coroutines.Dispatchers

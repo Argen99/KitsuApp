@@ -53,6 +53,6 @@ data class CategoriesLinksXXXDto(
     val related: String?,
 )
 
-data class CategoriesLinksDto (
+data class CategoriesLinksDto(
     val self: String?
 )

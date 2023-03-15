@@ -1,6 +1,7 @@
 package com.example.kitsuapp.di
 
 import com.example.kitsuapp.presentation.fragment.anime.AnimeViewModel
+import com.example.kitsuapp.presentation.fragment.login.LoginViewModel
 import com.example.kitsuapp.presentation.fragment.main.MainViewModel
 import com.example.kitsuapp.presentation.fragment.manga.MangaViewModel
 import com.example.kitsuapp.presentation.fragment.users.UsersViewModel
@@ -29,5 +30,9 @@ val appModule = module {
 
     viewModel<UsersViewModel> {
         UsersViewModel(getUsersUseCase = get())
+    }
+
+    viewModel<LoginViewModel> {
+        LoginViewModel(loginUseCase = get())
     }
 }

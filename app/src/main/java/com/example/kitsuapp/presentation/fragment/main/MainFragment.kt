@@ -1,5 +1,6 @@
 package com.example.kitsuapp.presentation.fragment.main
 
+import androidx.activity.OnBackPressedCallback
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.kitsuapp.R
 import com.example.kitsuapp.core.base.BaseFragment
@@ -37,5 +38,11 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(R.layout.f
         TabLayoutMediator(binding.tabLayout, binding.fragmentPager) { tab, position ->
             tab.text = pagerAdapter.getTabTitle(position)
         }.attach()
+
+        requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().finish()
+            }
+        })
     }
 }

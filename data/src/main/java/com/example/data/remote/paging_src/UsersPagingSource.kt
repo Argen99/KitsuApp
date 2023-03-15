@@ -16,7 +16,8 @@ class UsersPagingSource(
 
         return try {
             val response = apiService.getUsers(
-                limit = params.loadSize, offset = pageIndex).toModel()
+                limit = params.loadSize, offset = pageIndex
+            ).toModel()
             LoadResult.Page(
                 data = response.data,
                 nextKey = if (response.data.size == params.loadSize) pageIndex + params.loadSize else null,

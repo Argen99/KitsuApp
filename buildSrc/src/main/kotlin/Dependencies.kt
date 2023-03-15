@@ -14,9 +14,12 @@ object Dependencies {
         const val androidTestEspresso =
             "androidx.test.espresso:espresso-core:${Versions.androidTestEspresso}"
     }
+
     object NavigationComponent {
-        const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigationComponent}"
-        const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.navigationComponent}"
+        const val navigationFragment =
+            "androidx.navigation:navigation-fragment-ktx:${Versions.navigationComponent}"
+        const val navigationUiKtx =
+            "androidx.navigation:navigation-ui-ktx:${Versions.navigationComponent}"
     }
 
     object Room {
@@ -32,7 +35,8 @@ object Dependencies {
     }
 
     object Coroutines {
-        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+        const val coroutines =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     }
 
@@ -53,17 +57,23 @@ object Dependencies {
     }
 
     object ViewBindingDelegate {
-        const val viewBindingDelegate = "com.github.kirich1409:viewbindingpropertydelegate-noreflection:${Versions.viewBindingDelegate}"
+        const val viewBindingDelegate =
+            "com.github.kirich1409:viewbindingpropertydelegate-noreflection:${Versions.viewBindingDelegate}"
     }
 
     object Retrofit {
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-        const val retrofitConverterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+        const val retrofitConverterGson =
+            "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
         const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
     }
 
     object Interceptor {
         const val interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.interceptor}"
+    }
+
+    object Lottie {
+        const val lottie = "com.airbnb.android:lottie:${Versions.lottie}"
     }
 }
 
@@ -135,5 +145,8 @@ object Versions {
 
     // Kotlin
     const val kotlin = "1.7.10"
+
+    // Lottie
+    const val lottie = "6.0.0"
 
 }

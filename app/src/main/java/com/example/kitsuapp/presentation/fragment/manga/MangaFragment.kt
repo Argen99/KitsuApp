@@ -60,12 +60,12 @@ class MangaFragment : BaseFragment<FragmentMangaBinding, MangaViewModel>(R.layou
 
         viewModel.getCategoriesState.collectState(
             onLoading = {},
-            onSuccess = { data-> categoriesAdapter.submitData(data.map { it.toUI() })},
+            onSuccess = { data -> categoriesAdapter.submitData(data.map { it.toUI() }) },
             onError = {}
         )
     }
 
-    override fun setupClickListeners() {
+    override fun setupListeners() {
         binding.btnFilterManga.setOnClickListener {
             showBottomSheet()
         }
@@ -76,7 +76,8 @@ class MangaFragment : BaseFragment<FragmentMangaBinding, MangaViewModel>(R.layou
         val bottomSheet = BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
 
         filerBinding.rvCategoriesAnime.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = categoriesAdapter
         }
 

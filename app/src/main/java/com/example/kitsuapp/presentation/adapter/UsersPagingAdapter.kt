@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.domain.model.User
 import com.example.kitsuapp.core.extension.loadImage
 import com.example.kitsuapp.databinding.ItemUsersBinding
 import com.example.kitsuapp.model.UserUI
@@ -32,7 +31,7 @@ class UsersPagingAdapter(
         fun onBind(data: UserUI) = with(binding) {
             data.attributes?.avatar?.original?.let { ivUserAvatar.loadImage(it) }
             data.attributes?.name?.let { tvUserName.text = it }
-            data.attributes?.followersCount?.let{ tvUserFollowers.text = "$it followers" }
+            data.attributes?.followersCount?.let { tvUserFollowers.text = "$it followers" }
             tvUserName.text = data.attributes!!.name!!
         }
 
@@ -48,6 +47,7 @@ class UsersPagingAdapter(
             override fun areItemsTheSame(oldItem: UserUI, newItem: UserUI): Boolean {
                 return oldItem.id == newItem.id
             }
+
             override fun areContentsTheSame(oldItem: UserUI, newItem: UserUI): Boolean {
                 return oldItem == newItem
             }

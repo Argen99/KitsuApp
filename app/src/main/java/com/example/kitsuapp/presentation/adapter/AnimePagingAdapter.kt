@@ -2,8 +2,6 @@ package com.example.kitsuapp.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CompoundButton
-import android.widget.RadioGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -44,6 +42,7 @@ class AnimePagingAdapter(
             override fun areItemsTheSame(oldItem: DataUI, newItem: DataUI): Boolean {
                 return oldItem.id == newItem.id
             }
+
             override fun areContentsTheSame(oldItem: DataUI, newItem: DataUI): Boolean {
                 return oldItem == newItem
             }

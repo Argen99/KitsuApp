@@ -8,19 +8,20 @@ import androidx.paging.map
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.data.local.prefs.UserDataPrefs
 import com.example.kitsuapp.R
 import com.example.kitsuapp.core.base.BaseFragment
-import com.example.kitsuapp.core.extension.showToast
 import com.example.kitsuapp.databinding.BsFilterBinding
 import com.example.kitsuapp.databinding.FragmentAnimeBinding
 import com.example.kitsuapp.model.CategoriesDataUI
 import com.example.kitsuapp.model.mappers.toUI
 import com.example.kitsuapp.presentation.adapter.AnimePagingAdapter
-import com.example.kitsuapp.presentation.adapter.DefaultLoadStateAdapter
 import com.example.kitsuapp.presentation.adapter.CategoriesAdapter
+import com.example.kitsuapp.presentation.adapter.DefaultLoadStateAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AnimeFragment : BaseFragment<FragmentAnimeBinding, AnimeViewModel>(R.layout.fragment_anime) {
@@ -28,6 +29,8 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding, AnimeViewModel>(R.layou
     override val viewModel by viewModel<AnimeViewModel>()
 
     private val categoriesList = arrayListOf<CategoriesDataUI>()
+
+    private val user: UserDataPrefs by inject()
 
     private val animeAdapter: AnimePagingAdapter by lazy {
         AnimePagingAdapter(this::onItemClick)
@@ -43,13 +46,14 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding, AnimeViewModel>(R.layou
             adapter = animeAdapter.withLoadStateFooter(DefaultLoadStateAdapter())
         }
     }
-    override fun setupClickListeners() {
+
+    override fun setupListeners() {
         binding.btnFilterAnime.setOnClickListener {
             showBottomSheet()
         }
 
         binding.btn.setOnClickListener {
-            showToast(categoriesAdapter.getSelectedItems().joinToString())
+            user.saveCurrentUser(false)
         }
     }
 
@@ -70,7 +74,7 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding, AnimeViewModel>(R.layou
 
         viewModel.getCategoriesState.collectState(
             onLoading = {},
-            onSuccess = { data-> categoriesAdapter.submitData( data.map { it.toUI() } ) },
+            onSuccess = { data -> categoriesAdapter.submitData(data.map { it.toUI() }) },
             onError = {}
         )
     }

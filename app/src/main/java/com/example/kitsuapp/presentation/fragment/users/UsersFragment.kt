@@ -27,8 +27,10 @@ class UsersFragment : BaseFragment<FragmentUsersBinding, UsersViewModel>(R.layou
 
     override fun initialize() {
         binding.rvUsers.apply {
-            layoutManager = LinearLayoutManager(requireContext(),
-                LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.VERTICAL, false
+            )
             adapter = usersAdapter.withLoadStateFooter(DefaultLoadStateAdapter())
         }
     }

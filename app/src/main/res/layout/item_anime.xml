@@ -12,6 +12,6 @@
         android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher_background"
         android:layout_width="160dp"
-        android:layout_height="220dp"/>
+        android:layout_height="220dp" />
 
 </FrameLayout>

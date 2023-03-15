@@ -12,4 +12,13 @@
     <string name="categories">Categories</string>
     <string name="reset">Reset</string>
     <string name="apply">Apply</string>
+    <string name="sign_in">Sign in to your account</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="kitsu">Kitsu</string>
+    <string name="sign_in_tv">Sign in</string>
+    <string name="enter_email">Enter email</string>
+    <string name="enter_passwors">Enter password</string>
+    <string name="success">Successful</string>
+    <string name="wrong_username">\"wrong username or password \"</string>
 </resources>

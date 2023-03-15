@@ -35,7 +35,7 @@ fun CategoriesRelationships.toUI() = CategoriesRelationshipsUI(
 )
 
 fun CategoriesLinksXX.toUI() = CategoriesLinksXXUI(
-    links =links?.toUI()
+    links = links?.toUI()
 )
 
 fun CategoriesAttributes.toUI() = CategoriesAttributesUI(

@@ -17,21 +17,22 @@ import kotlinx.coroutines.flow.*
 class MangaViewModel(
     private val getMangaUseCase: GetMangaUseCase,
     private val getCategoriesUseCase: GetCategoriesUseCase
-): BaseViewModel() {
+) : BaseViewModel() {
 
     val mangaFlow: Flow<PagingData<Data>>
     private val searchBy = MutableStateFlow("")
     private val filterBy = MutableStateFlow<List<String>>(emptyList())
 
-    private val _getCategoriesState = MutableStateFlow<UIState<List<CategoriesData>>>(UIState.Empty())
+    private val _getCategoriesState =
+        MutableStateFlow<UIState<List<CategoriesData>>>(UIState.Empty())
     val getCategoriesState = _getCategoriesState.asStateFlow()
 
     init {
         mangaFlow = combine(searchBy, filterBy) { search, filter ->
             Pair(search, filter)
         }.flatMapLatest { (search, filter) ->
-            if(search.isBlank()) {
-                getMangaUseCase.invoke(null ,filter )
+            if (search.isBlank()) {
+                getMangaUseCase.invoke(null, filter)
                     .debounce(500)
                     .cachedIn(viewModelScope)
             } else {

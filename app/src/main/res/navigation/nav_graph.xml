@@ -10,4 +10,24 @@
         android:name="com.example.kitsuapp.presentation.fragment.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/animeFragment"
+        android:name="com.example.kitsuapp.presentation.fragment.anime.AnimeFragment"
+        android:label="fragment_anime"
+        tools:layout="@layout/fragment_anime" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.kitsuapp.presentation.fragment.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/mangaFragment"
+        android:name="com.example.kitsuapp.presentation.fragment.manga.MangaFragment"
+        android:label="fragment_manga"
+        tools:layout="@layout/fragment_manga" />
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="com.example.kitsuapp.presentation.fragment.users.UsersFragment"
+        android:label="fragment_users"
+        tools:layout="@layout/fragment_users" />
 </navigation>
