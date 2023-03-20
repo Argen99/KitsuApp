@@ -6,6 +6,7 @@
     <string name="anime">Anime</string>
     <string name="manga">Manga</string>
     <string name="users">Users</string>
+    <string name="posts">Posts</string>
     <string name="search_users">Search Users</string>
     <string name="search_manga">Search Manga</string>
     <string name="filter_button">filter button</string>
@@ -21,4 +22,15 @@
     <string name="enter_passwors">Enter password</string>
     <string name="success">Successful</string>
     <string name="wrong_username">\"wrong username or password \"</string>
+    <string name="this_post_contains_spoilers">This post contains spoilers.</string>
+    <string name="smile">( ⊙_⊙ )</string>
+    <string name="write_something">Write something....</string>
+    <string name="nsfw">NSFW</string>
+    <string name="spoiler">Spoiler</string>
+    <string name="create_post">Create Post</string>
+    <string name="post">Post</string>
+    <string name="cancel">Cancel</string>
+    <string name="app_icon">app icon</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="enter_text">Enter text</string>
 </resources>

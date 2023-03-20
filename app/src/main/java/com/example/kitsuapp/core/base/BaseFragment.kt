@@ -7,10 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.viewbinding.ViewBinding
-import com.example.kitsuapp.R
 import com.example.kitsuapp.core.ui_state.UIState
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -21,14 +18,9 @@ abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel>(
 
     protected abstract val binding: Binding
     protected abstract val viewModel: ViewModel
-    private var _navController: NavController? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val navHostFragment =
-            activity?.supportFragmentManager?.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        _navController = navHostFragment.navController
 
         initialize()
         setupRequest()
@@ -42,14 +34,6 @@ abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel>(
     protected open fun performListeners() {}
     protected open fun setupObservers() {}
     protected open fun setupListeners() {}
-
-    protected fun navigate(direction: Int, data: Bundle? = null) {
-        _navController?.navigate(direction, data)
-    }
-
-    protected fun navigateUp() {
-        _navController?.navigateUp()
-    }
 
     protected fun <T> StateFlow<UIState<T>>.collectState(
         onLoading: () -> Unit,

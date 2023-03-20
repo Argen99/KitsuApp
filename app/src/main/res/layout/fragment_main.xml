@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/brown"
     android:orientation="vertical"
-    tools:context=".presentation.fragment.main.MainFragment">
+    tools:context=".presentation.fragment.main_flow.main.MainFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"

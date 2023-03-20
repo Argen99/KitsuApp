@@ -1,7 +1,7 @@
 package com.example.data.remote.model
 
 data class LoginRequestDto(
-    val grant_type: String,
+    val grant_type: String = "password",
     val username: String,
     val password: String
 )

@@ -1,12 +1,18 @@
 package com.example.kitsuapp.model.mappers
 
+import com.example.data.remote.model.mappers.toDto
+import com.example.data.remote.model.mappers.toModel
 import com.example.domain.model.*
 import com.example.kitsuapp.model.*
 
-fun UserResponse.toUI() = UserResponseUI(
+fun UsersResponse.toUI() = UsersResponseUI(
     data = data.map { it.toUI() },
     meta = meta.toUI(),
     links = links?.toUI()
+)
+
+fun UserResponse.toUI() = UserResponseUI(
+    data = data.toUI()
 )
 
 fun UserCountMeta.toUI() = UserCountMetaUI(
@@ -126,10 +132,14 @@ fun UDimensions.toUI() = UDimensionsUI(
 
 //  **** To Model ****
 
-fun UserResponseUI.toModel() = UserResponse(
+fun UsersResponseUI.toModel() = UsersResponse(
     data = data.map { it.toModel() },
     meta = meta.toModel(),
     links = links?.toModel()
+)
+
+fun UserResponseUI.toModel() = UserResponse(
+    data = data.toModel()
 )
 
 fun UserCountMetaUI.toModel() = UserCountMeta(

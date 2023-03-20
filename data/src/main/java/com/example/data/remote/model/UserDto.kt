@@ -1,9 +1,13 @@
 package com.example.data.remote.model
 
-data class UserResponseDto(
+data class UsersResponseDto(
     val data: List<UserDto>,
     val meta: UserCountMetaDto,
     val links: UsLinksDto?
+)
+
+data class UserResponseDto(
+    val data: UserDto
 )
 
 data class UserCountMetaDto(

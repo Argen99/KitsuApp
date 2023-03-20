@@ -3,10 +3,14 @@ package com.example.data.remote.model.mappers
 import com.example.data.remote.model.*
 import com.example.domain.model.*
 
-fun UserResponse.toDto() = UserResponseDto(
+fun UsersResponse.toDto() = UsersResponseDto(
     data = data.map { it.toDto() },
     meta = meta.toDto(),
     links = links?.toDto()
+)
+
+fun UserResponse.toDto() = UserResponseDto(
+    data = data.toDto()
 )
 
 fun UserCountMeta.toDto() = UserCountMetaDto(
@@ -126,10 +130,14 @@ fun UDimensions.toDto() = UDimensionsDto(
 
 //  **** To Model ****
 
-fun UserResponseDto.toModel() = UserResponse(
+fun UsersResponseDto.toModel() = UsersResponse(
     data = data.map { it.toModel() },
     meta = meta.toModel(),
     links = links?.toModel()
+)
+
+fun UserResponseDto.toModel() = UserResponse(
+    data = data.toModel()
 )
 
 fun UserCountMetaDto.toModel() = UserCountMeta(

@@ -9,9 +9,8 @@ data class CategoriesResponseDto(
 data class CategoriesLinksXXXXDto(
     val first: String?,
     val next: String?,
-    val last: String?,
+    val last: String?
 )
-
 
 data class CategoriesMetaDto(
     val count: Int?

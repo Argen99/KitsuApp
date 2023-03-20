@@ -1,11 +1,5 @@
 package com.example.domain.model
 
-data class LoginRequest(
-    val grant_type: String,
-    val username: String,
-    val password: String
-)
-
 data class LoginResponse(
     val access_token: String,
     val token_type: String,

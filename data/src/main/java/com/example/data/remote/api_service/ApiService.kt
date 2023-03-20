@@ -1,10 +1,7 @@
 package com.example.data.remote.api_service
 
 import com.example.data.remote.model.*
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
     @GET("api/edge/anime")
@@ -26,8 +23,9 @@ interface ApiService {
     @GET("api/edge/users")
     suspend fun getUsers(
         @Query("page[limit]") limit: Int,
-        @Query("page[offset]") offset: Int
-    ): UserResponseDto
+        @Query("page[offset]") offset: Int,
+        @Query("filter[name]") name: String?
+    ): UsersResponseDto
 
     @GET("api/edge/categories")
     suspend fun getCategories(
@@ -38,4 +36,26 @@ interface ApiService {
     suspend fun login(
         @Body loginRequestDto: LoginRequestDto
     ): LoginResponseDto
+
+    @GET("api/edge/posts")
+    suspend fun getPosts(
+        @Query("page[limit]") limit: Int,
+        @Query("page[offset]") offset: Int
+    ): PostsResponseDto
+
+    @GET("api/edge/posts/{id}/user")
+    suspend fun getUserByPostId(
+        @Path("id") postId: String
+    ): UserResponseDto
+
+    @GET("api/edge/users")
+    suspend fun getUsersByName(
+        @Query("filter[name]") name: String?
+    ): UsersResponseDto
+
+    @Headers("Content-Type: application/vnd.api+json")
+    @POST("api/edge/posts")
+    suspend fun createPost(
+        @Body body: CreatePostDto?
+    )
 }

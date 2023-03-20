@@ -8,7 +8,7 @@ import com.example.domain.model.User
 
 class UsersPagingSource(
     private val apiService: ApiService,
-    private val text: String
+    private val name: String?
 ) : PagingSource<Int, User>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, User> {
@@ -16,7 +16,7 @@ class UsersPagingSource(
 
         return try {
             val response = apiService.getUsers(
-                limit = params.loadSize, offset = pageIndex
+                limit = params.loadSize, offset = pageIndex, name = name
             ).toModel()
             LoadResult.Page(
                 data = response.data,

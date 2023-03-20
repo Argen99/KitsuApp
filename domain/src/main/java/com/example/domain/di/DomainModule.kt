@@ -25,4 +25,20 @@ val domainModule = module {
     factory<LoginUseCase> {
         LoginUseCase(repository = get<MainRepository>())
     }
+
+    factory<GetPostsUseCase> {
+        GetPostsUseCase(repository = get<MainRepository>())
+    }
+
+    factory<GetUserByPostIdUseCase> {
+        GetUserByPostIdUseCase(repository = get<MainRepository>())
+    }
+
+    factory<GetUserByNameUseCase> {
+        GetUserByNameUseCase(repository = get<MainRepository>())
+    }
+
+    factory<CreatePostUseCase> {
+        CreatePostUseCase(repository = get<MainRepository>())
+    }
 }

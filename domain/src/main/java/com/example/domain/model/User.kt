@@ -1,9 +1,13 @@
 package com.example.domain.model
 
-data class UserResponse(
+data class UsersResponse(
     val data: List<User>,
     val meta: UserCountMeta,
     val links: UsLinks?,
+)
+
+data class UserResponse(
+    val data: User
 )
 
 data class UserCountMeta(

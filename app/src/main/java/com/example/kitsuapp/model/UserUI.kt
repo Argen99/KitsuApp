@@ -1,9 +1,13 @@
 package com.example.kitsuapp.model
 
-data class UserResponseUI(
+data class UsersResponseUI(
     val data: List<UserUI>,
     val meta: UserCountMetaUI,
     val links: UsLinksUI?,
+)
+
+data class UserResponseUI(
+    val data: UserUI
 )
 
 data class UserCountMetaUI(
