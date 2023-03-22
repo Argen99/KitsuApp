@@ -1,16 +1,16 @@
 plugins {
-    id(Plugins.AGP.library)
-    id(Plugins.Kotlin.kotlin)
-    id(Plugins.Kotlin.kotlinKapt)
+    id(libs.plugins.agp.library.get().pluginId)
+    id(libs.plugins.kotlin.kotlin.get().pluginId)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
 }
 
 android {
     namespace = "com.example.data"
-    compileSdk = AndroidConfig.compileSdk
+    compileSdk = config.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = AndroidConfig.minSdk
-        targetSdk = AndroidConfig.targetSdk
+        minSdk = config.versions.minSdk.get().toInt()
+        targetSdk = config.versions.targetSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -38,34 +38,21 @@ dependencies {
 
     // Impl project
     implementation(project(":domain"))
-
     // UI
-    implementation(Dependencies.UI.androidCore)
-    testImplementation(Dependencies.UI.junit)
-    androidTestImplementation(Dependencies.UI.androidTestJunit)
-
-    // Inject
-    implementation(Dependencies.Koin.koinCore)
-    implementation(Dependencies.Koin.koinAndroid)
-    implementation(Dependencies.Koin.koinTest)
-
+    implementation(libs.uiComponents.androidCore)
+    testImplementation(libs.uiComponents.junit)
+    androidTestImplementation(libs.uiComponents.androidTestJunit)
+    // koin
+    implementation(libs.bundles.koin)
     // Paging
-    implementation(Dependencies.Paging.pagingRuntime)
-
+    implementation(libs.paging.pagingRuntime)
     // Retrofit
-    implementation(Dependencies.Retrofit.retrofit)
-    implementation(Dependencies.Retrofit.retrofitConverterGson)
-    implementation(Dependencies.Retrofit.okHttp)
-
+    implementation(libs.bundles.retrofit)
+    // okHttp
+    implementation(libs.bundles.okHttp)
     // Room
-    implementation(Dependencies.Room.roomRunTime)
-    implementation(Dependencies.Room.roomKtx)
-    kapt(Dependencies.Room.roomCompiler)
-
+    implementation(libs.bundles.room)
+    kapt(libs.room.roomCompiler)
     // Coroutines
-    implementation(Dependencies.Coroutines.coroutines)
-    implementation(Dependencies.Coroutines.core)
-
-    // Interceptor
-    implementation(Dependencies.Interceptor.interceptor)
+    implementation(libs.bundles.coroutines)
 }

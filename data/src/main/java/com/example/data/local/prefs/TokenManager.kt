@@ -2,29 +2,18 @@ package com.example.data.local.prefs
 
 import android.content.Context
 
-class TokenManager (context: Context) {
+class TokenManager(context: Context) {
 
     private var prefs = context.getSharedPreferences(PREFS_TOKEN_FILE, Context.MODE_PRIVATE)
+    var accessToken: String?
+        get() = prefs.getString(USER_ACCESS_TOKEN, null)
+        set(value) = prefs.edit().putString(USER_ACCESS_TOKEN, value).apply()
 
-    fun saveAccessToken(accessToken: String) {
-        val editor = prefs.edit()
-        editor.putString(USER_ACCESS_TOKEN, accessToken)
-        editor.apply()
-    }
 
-    fun getAccessToken() : String? {
-        return prefs.getString(USER_ACCESS_TOKEN, null)
-    }
+    var refreshToken: String?
+    get() = prefs.getString(USER_REFRESH_TOKEN, null)
+    set(value) = prefs.edit().putString(USER_REFRESH_TOKEN, value).apply()
 
-    fun saveRefreshToken(refreshToken: String) {
-        val editor = prefs.edit()
-        editor.putString(USER_REFRESH_TOKEN, refreshToken)
-        editor.apply()
-    }
-
-    fun getRefreshToken() : String? {
-        return prefs.getString(USER_REFRESH_TOKEN, null)
-    }
 
     fun deleteAccessToken() {
         prefs.edit().remove(USER_ACCESS_TOKEN).apply()

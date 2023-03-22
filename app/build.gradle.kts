@@ -1,17 +1,17 @@
 plugins {
-    id(Plugins.AGP.application)
-    id(Plugins.Kotlin.kotlin)
-    id(Plugins.Kotlin.kotlinKapt)
+    id(libs.plugins.agp.application.get().pluginId)
+    id(libs.plugins.kotlin.kotlin.get().pluginId)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
 }
 
 android {
     namespace = "com.example.kitsuapp"
-    compileSdk = AndroidConfig.compileSdk
+    compileSdk = config.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.example.kitsuapp"
-        minSdk = AndroidConfig.minSdk
-        targetSdk = AndroidConfig.targetSdk
+        minSdk = config.versions.minSdk.get().toInt()
+        targetSdk = config.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -36,9 +36,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        viewBinding = true
-    }
+    buildFeatures.viewBinding = true
 }
 
 dependencies {
@@ -46,57 +44,33 @@ dependencies {
     // Implementation project
     implementation(project(":domain"))
     implementation(project(":data"))
-
-    // UI
-    implementation(Dependencies.UI.androidCore)
-    implementation(Dependencies.UI.androidAppCompat)
-    implementation(Dependencies.UI.androidMaterial)
-    implementation(Dependencies.UI.androidConstraintLayout)
-    implementation(Dependencies.UI.androidxActivity)
-    implementation(Dependencies.UI.androidxFragment)
-    implementation(Dependencies.UI.androidLegacy)
-    testImplementation(Dependencies.UI.junit)
-    androidTestImplementation(Dependencies.UI.androidTestJunit)
-    androidTestImplementation(Dependencies.UI.androidTestEspresso)
+    //UIComponents
+    implementation(libs.bundles.uiComponents)
+    testImplementation(libs.uiComponents.junit)
+    androidTestImplementation(libs.uiComponents.androidTestJunit)
+    androidTestImplementation(libs.uiComponents.androidTestEspresso)
 
     // Navigation component
-    implementation(Dependencies.NavigationComponent.navigationFragment)
-    implementation(Dependencies.NavigationComponent.navigationUiKtx)
-
+    implementation(libs.bundles.navigationComponent)
     // Room
-    implementation(Dependencies.Room.roomRunTime)
-    implementation(Dependencies.Room.roomKtx)
-    kapt(Dependencies.Room.roomCompiler)
-
-    // LiveData
-    implementation(Dependencies.LiveData.liveData)
-    implementation(Dependencies.LiveData.viewModel)
-    implementation(Dependencies.LiveData.runtime)
-
+    implementation(libs.bundles.room)
+    kapt(libs.room.roomCompiler)
+    // Lifecycle
+    implementation(libs.bundles.lifecycle)
     // Coroutines
-    implementation(Dependencies.Coroutines.coroutines)
-    implementation(Dependencies.Coroutines.core)
-
+    implementation(libs.bundles.coroutines)
     // Koin
-    implementation(Dependencies.Koin.koinCore)
-    implementation(Dependencies.Koin.koinAndroid)
-    testImplementation(Dependencies.Koin.koinTest)
-
+    implementation(libs.bundles.koin)
+    testImplementation(libs.koin.koinTest)
     // Paging
-    implementation(Dependencies.Paging.pagingRuntime)
-
+    implementation(libs.paging.pagingRuntime)
     // Glide
-    implementation(Dependencies.Glide.glide)
-    kapt(Dependencies.Glide.glideCompiler)
-
+    implementation(libs.glide.glide)
+    kapt(libs.glide.glideCompiler)
     // ViewBindingDelegate
-    implementation(Dependencies.ViewBindingDelegate.viewBindingDelegate)
-
+    implementation(libs.viewBindingDelegate.viewBinding)
     // Retrofit
-    implementation(Dependencies.Retrofit.retrofit)
-    implementation(Dependencies.Retrofit.retrofitConverterGson)
-    implementation(Dependencies.Retrofit.okHttp)
-
-    // Interceptor
-    implementation(Dependencies.Interceptor.interceptor)
+    implementation(libs.bundles.retrofit)
+    // okHttp
+    implementation(libs.bundles.okHttp)
 }

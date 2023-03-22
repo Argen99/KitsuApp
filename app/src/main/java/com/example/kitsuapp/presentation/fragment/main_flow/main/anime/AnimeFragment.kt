@@ -31,7 +31,6 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding, AnimeViewModel>(R.layou
     override val viewModel by viewModel<AnimeViewModel>()
 
     private val categoriesList = arrayListOf<CategoriesDataUI>()
-    private val token: TokenManager by inject()
 
     private val animeAdapter: AnimePagingAdapter by lazy {
         AnimePagingAdapter(this::onItemClick)
@@ -55,6 +54,9 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding, AnimeViewModel>(R.layou
     override fun setupListeners() {
         binding.btnFilterAnime.setOnClickListener {
             showBottomSheet()
+        }
+        binding.btn.setOnClickListener {
+
         }
     }
 

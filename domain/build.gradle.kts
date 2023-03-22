@@ -1,6 +1,6 @@
 plugins {
-    id(Plugins.Java.javaLibrary)
-    id(Plugins.Kotlin.jvm)
+    id(libs.plugins.javaLibrary.get().pluginId)
+    id(libs.plugins.kotlin.jvm.get().pluginId)
 }
 
 java {
@@ -9,8 +9,8 @@ java {
 }
 
 dependencies {
-    implementation(Dependencies.Coroutines.core)
-    implementation(Dependencies.Paging.pagingCommon)
-    implementation(Dependencies.Retrofit.retrofit)
-    implementation(Dependencies.Koin.koinCore)
+    implementation(libs.coroutines.core)
+    implementation(libs.paging.pagingCommon)
+    implementation(libs.retrofit.retrofit)
+    implementation(libs.koin.koinCore)
 }

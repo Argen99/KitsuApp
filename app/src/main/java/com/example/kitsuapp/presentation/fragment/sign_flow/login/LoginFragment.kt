@@ -54,8 +54,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layou
     private fun onSuccessLogin(loginResponse: LoginResponse) {
         showToast(getString(R.string.success))
         binding.pbLogin.gone()
-        tokenManager.saveAccessToken(loginResponse.access_token)
-        tokenManager.saveRefreshToken(loginResponse.refresh_token)
+        tokenManager.accessToken = loginResponse.access_token
+        tokenManager.refreshToken = loginResponse.refresh_token
         activityNavController().navigateSafely(R.id.action_global_mainFlowFragment)
     }
 }

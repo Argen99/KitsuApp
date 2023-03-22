@@ -17,7 +17,9 @@ class MainActivity : AppCompatActivity() {
 
     private val tokenManager: TokenManager by inject()
     private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
+    private val navController by lazy {
+        (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,16 +30,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
-
         val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
         when {
-            tokenManager.getAccessToken() == null -> {
+            tokenManager.accessToken == null -> {
                 navGraph.setStartDestination(R.id.signFlowFragment)
             }
-            tokenManager.getAccessToken() != null -> {
+            tokenManager.accessToken != null -> {
                 navGraph.setStartDestination(R.id.mainFlowFragment)
             }
         }

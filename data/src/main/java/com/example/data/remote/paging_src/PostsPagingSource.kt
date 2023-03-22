@@ -23,7 +23,6 @@ class PostsPagingSource(
                 nextKey = if (response.data.size == params.loadSize) pageIndex + params.loadSize else null,
                 prevKey = null
             )
-
         } catch (exception: Exception) {
             LoadResult.Error(exception)
         }
