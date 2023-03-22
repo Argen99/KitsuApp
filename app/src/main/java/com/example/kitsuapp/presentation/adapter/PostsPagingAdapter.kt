@@ -31,14 +31,18 @@ class PostsPagingAdapter(
         fun onBind(data: PostsDataUI) = with(binding) {
             tvContent.text = data.attributes.content
             tvUsername.text = data.relationships?.userModel?.attributes?.name
-            data.relationships?.userModel?.attributes?.avatar?.medium?.let{ivUserAvatar.loadImage(it)}
+            data.relationships?.userModel?.attributes?.avatar?.medium?.let {
+                ivUserAvatar.loadImage(
+                    it
+                )
+            }
             if (data.attributes.embed?.url != null) {
                 ivContentImage.visible()
                 ivContentImage.loadImage(data.attributes.embed.url)
             } else {
                 ivContentImage.gone()
             }
-            if(data.attributes.spoiler != null) {
+            if (data.attributes.spoiler != null) {
                 if (data.attributes.spoiler) {
                     tvContent.gone()
                     ivContentImage.gone()
@@ -67,6 +71,7 @@ class PostsPagingAdapter(
             override fun areItemsTheSame(oldItem: PostsDataUI, newItem: PostsDataUI): Boolean {
                 return oldItem.id == newItem.id
             }
+
             override fun areContentsTheSame(oldItem: PostsDataUI, newItem: PostsDataUI): Boolean {
                 return oldItem == newItem
             }

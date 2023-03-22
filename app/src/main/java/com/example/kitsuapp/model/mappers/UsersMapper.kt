@@ -1,7 +1,5 @@
 package com.example.kitsuapp.model.mappers
 
-import com.example.data.remote.model.mappers.toDto
-import com.example.data.remote.model.mappers.toModel
 import com.example.domain.model.*
 import com.example.kitsuapp.model.*
 

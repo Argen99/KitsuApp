@@ -77,6 +77,7 @@ fun PostsImageDto.toModel() = PostsImage(
     width = width,
     height = height
 )
+
 fun PostsSelfDto.toModel() = PostsSelf(
     self = self
 )
@@ -157,6 +158,7 @@ fun PostsImage.toDto() = PostsImageDto(
     width = width,
     height = height
 )
+
 fun PostsSelf.toDto() = PostsSelfDto(
     self = self
 )

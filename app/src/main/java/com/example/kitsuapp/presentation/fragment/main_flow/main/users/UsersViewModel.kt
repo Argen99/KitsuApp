@@ -6,10 +6,12 @@ import androidx.paging.cachedIn
 import com.example.domain.model.User
 import com.example.domain.use_cases.GetUsersUseCase
 import com.example.kitsuapp.core.base.BaseViewModel
+import com.example.kitsuapp.model.UserUI
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class UsersViewModel(
@@ -20,8 +22,8 @@ class UsersViewModel(
     private val searchBy = MutableStateFlow("")
 
     init {
-        usersFlow = searchBy.flatMapLatest {name->
-            if (name.isBlank()){
+        usersFlow = searchBy.flatMapLatest { name ->
+            if (name.isBlank()) {
                 getUsersUseCase(null)
                     .cachedIn(viewModelScope)
             } else {

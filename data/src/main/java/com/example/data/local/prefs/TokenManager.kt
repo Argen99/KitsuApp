@@ -11,8 +11,8 @@ class TokenManager(context: Context) {
 
 
     var refreshToken: String?
-    get() = prefs.getString(USER_REFRESH_TOKEN, null)
-    set(value) = prefs.edit().putString(USER_REFRESH_TOKEN, value).apply()
+        get() = prefs.getString(USER_REFRESH_TOKEN, null)
+        set(value) = prefs.edit().putString(USER_REFRESH_TOKEN, value).apply()
 
 
     fun deleteAccessToken() {

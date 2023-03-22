@@ -21,7 +21,7 @@ data class PostsDataUI(
     val type: String?,
     val links: PostsSelfUI?,
     val attributes: PostsAttributesUI,
-    val relationships: PostsRelationshipsUI?,
+    val relationships: PostsRelationshipsUI?
 )
 
 data class PostsRelationshipsUI(

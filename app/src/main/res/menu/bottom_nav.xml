@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title=""
         android:id="@+id/mainFragment"
-        android:icon="@drawable/ic_search"/>
+        android:icon="@drawable/ic_search"
+        android:title="" />
 
     <item
-        android:title=""
         android:id="@+id/createPostFragment"
-        android:icon="@drawable/ic_add_post"/>
+        android:icon="@drawable/ic_add_post"
+        android:title="" />
 
 </menu>

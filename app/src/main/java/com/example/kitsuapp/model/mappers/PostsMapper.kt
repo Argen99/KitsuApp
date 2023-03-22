@@ -77,6 +77,7 @@ fun PostsImage.toUI() = PostsImageUI(
     width = width,
     height = height
 )
+
 fun PostsSelf.toUI() = PostsSelfUI(
     self = self
 )

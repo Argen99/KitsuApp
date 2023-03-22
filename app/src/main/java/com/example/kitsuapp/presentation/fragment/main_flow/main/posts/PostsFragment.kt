@@ -25,19 +25,28 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(R.layou
     }
 
     override fun initialize() {
-        binding.rvPosts.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            adapter = postsAdapter.withLoadStateFooter(DefaultLoadStateAdapter())
-        }
+        constructRecycler()
 
         postsAdapter.addLoadStateListener { state ->
             binding.pbPosts.isVisible = state.source.refresh is LoadState.Loading
         }
     }
 
+    private fun constructRecycler() {
+        binding.rvPosts.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            adapter = postsAdapter.withLoadStateFooter(DefaultLoadStateAdapter())
+        }
+    }
+
     override fun setupObservers() {
+        subscribeToPosts()
+    }
+
+    private fun subscribeToPosts() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.postsFlow.collectLatest { pagingData->
+            viewModel.postsFlow.collectLatest { pagingData ->
                 postsAdapter.submitData(pagingData.map {
                     val data = viewModel.getUser(it.id!!)
                     it.relationships!!.userModel = data

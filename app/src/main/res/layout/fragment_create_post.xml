@@ -1,136 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.fragment.main_flow.create_post.CreatePostFragment">
 
     <androidx.appcompat.widget.Toolbar
-        android:background="@color/brown"
+        android:id="@+id/tb_create_post"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/brown"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tv_cancel"
-            android:text="@string/cancel"
-            android:textSize="16sp"
-            android:textColor="@android:color/darker_gray"
-            android:layout_gravity="center_vertical|start"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:text="@string/cancel"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp" />
 
         <TextView
-            android:text="@string/create_post"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/create_post"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_post"
-            android:text="@string/post"
-            android:textSize="16sp"
-            android:layout_marginEnd="16dp"
-            android:textColor="@android:color/holo_orange_light"
-            android:layout_gravity="center_vertical|end"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="16dp"
+            android:text="@string/post"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="16sp" />
 
     </androidx.appcompat.widget.Toolbar>
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_user_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb_create_post"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/iv_user_image"
+        app:layout_constraintStart_toEndOf="@+id/iv_user_image"
+        app:layout_constraintTop_toTopOf="@+id/iv_user_image"
+        app:layout_goneMarginStart="8dp"
+        tools:text="timplifer" />
+
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:hint="@string/write_something"
+        app:layout_constraintStart_toStartOf="@+id/iv_user_image"
+        app:layout_constraintTop_toBottomOf="@+id/iv_user_image" />
+
     <LinearLayout
-        android:padding="16dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_user_image"
-            android:src="@drawable/ic_launcher_background"
-            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
-            android:layout_width="60dp"
-            android:layout_height="60dp"/>
-
-        <TextView
-            android:id="@+id/tv_user_name"
-            tools:text="timplifer"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginStart="8dp"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginHorizontal="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/et_content"
-            android:hint="@string/write_something"
-            android:background="@android:color/transparent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-    <LinearLayout
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:orientation="horizontal"
         android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/et_content">
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:background="@drawable/bg_check_box"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_check_box">
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cb_nsfw"
-                android:text="@string/nsfw"
-                android:textStyle="bold"
-                android:button="@drawable/bg_cb_btn"
                 android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:button="@drawable/bg_cb_btn"
                 android:paddingHorizontal="12dp"
-                android:layout_height="wrap_content"/>
+                android:text="@string/nsfw"
+                android:textStyle="bold" />
 
         </FrameLayout>
 
         <FrameLayout
-            android:layout_marginStart="20dp"
             android:layout_width="wrap_content"
-            android:background="@drawable/bg_check_box"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/bg_check_box">
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cb_spoiler"
-                android:text="@string/spoiler"
-                android:button="@drawable/bg_cb_btn"
-                android:textStyle="bold"
-                android:layout_marginStart="12dp"
-                android:paddingHorizontal="12dp"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:button="@drawable/bg_cb_btn"
+                android:paddingHorizontal="12dp"
+                android:text="@string/spoiler"
+                android:textStyle="bold" />
 
         </FrameLayout>
     </LinearLayout>
 
     <ProgressBar
         android:id="@+id/pb_create_post"
-        android:visibility="gone"
-        android:indeterminateTint="@color/orange"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:indeterminateTint="@color/orange"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

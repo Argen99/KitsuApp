@@ -1,9 +1,10 @@
 package com.example.domain.use_cases
 
+import com.example.domain.repository.AuthRepository
 import com.example.domain.repository.MainRepository
 
 class LoginUseCase(
-    private val repository: MainRepository
+    private val repository: AuthRepository
 ) {
     operator fun invoke(username: String, password: String) = repository.login(username, password)
 }

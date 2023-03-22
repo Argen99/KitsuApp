@@ -2,12 +2,12 @@ package com.example.data.remote.paging_src
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.data.remote.api_service.ApiService
+import com.example.data.remote.api_service.AnimeApiService
 import com.example.data.remote.model.mappers.toModel
 import com.example.domain.model.Data
 
 class AnimePagingSource(
-    private val apiService: ApiService,
+    private val apiService: AnimeApiService,
     private val text: String?,
     private val categories: List<String>?,
 ) : PagingSource<Int, Data>() {
@@ -17,9 +17,9 @@ class AnimePagingSource(
 
         return try {
             val response = apiService.getAnime(
-                    limit = params.loadSize, offset = pageIndex, text = text,
-                    categories = categories
-                ).toModel()
+                limit = params.loadSize, offset = pageIndex, text = text,
+                categories = categories
+            ).toModel()
             LoadResult.Page(
                 data = response.data,
                 nextKey = if (response.data.size == params.loadSize) pageIndex + params.loadSize else null,

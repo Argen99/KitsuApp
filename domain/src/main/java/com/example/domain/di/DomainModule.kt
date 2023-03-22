@@ -1,21 +1,21 @@
 package com.example.domain.di
 
-import com.example.domain.repository.MainRepository
+import com.example.domain.repository.*
 import com.example.domain.use_cases.*
 import org.koin.dsl.module
 
 val domainModule = module {
 
     factory<GetAnimeUseCase> {
-        GetAnimeUseCase(repository = get<MainRepository>())
+        GetAnimeUseCase(repository = get<AnimeRepository>())
     }
 
     factory<GetMangaUseCase> {
-        GetMangaUseCase(repository = get<MainRepository>())
+        GetMangaUseCase(repository = get<MangaRepository>())
     }
 
     factory<GetUsersUseCase> {
-        GetUsersUseCase(repository = get<MainRepository>())
+        GetUsersUseCase(repository = get<UserRepository>())
     }
 
     factory<GetCategoriesUseCase> {
@@ -23,22 +23,22 @@ val domainModule = module {
     }
 
     factory<LoginUseCase> {
-        LoginUseCase(repository = get<MainRepository>())
+        LoginUseCase(repository = get<AuthRepository>())
     }
 
     factory<GetPostsUseCase> {
-        GetPostsUseCase(repository = get<MainRepository>())
+        GetPostsUseCase(repository = get<PostRepository>())
     }
 
     factory<GetUserByPostIdUseCase> {
-        GetUserByPostIdUseCase(repository = get<MainRepository>())
+        GetUserByPostIdUseCase(repository = get<UserRepository>())
     }
 
     factory<GetUserByNameUseCase> {
-        GetUserByNameUseCase(repository = get<MainRepository>())
+        GetUserByNameUseCase(repository = get<UserRepository>())
     }
 
     factory<CreatePostUseCase> {
-        CreatePostUseCase(repository = get<MainRepository>())
+        CreatePostUseCase(repository = get<PostRepository>())
     }
 }

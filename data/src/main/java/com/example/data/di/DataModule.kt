@@ -1,15 +1,45 @@
 package com.example.data.di
 
 import com.example.data.local.prefs.TokenManager
-import com.example.data.remote.api_service.ApiService
-import com.example.data.remote.repository.MainRepositoryImpl
-import com.example.domain.repository.MainRepository
+import com.example.data.remote.api_service.*
+import com.example.data.remote.repository.*
+import com.example.domain.repository.*
 import org.koin.dsl.module
 
 val dataModule = module {
     single<MainRepository> {
         MainRepositoryImpl(
-            apiService = get<ApiService>()
+            apiService = get<MainApiService>()
+        )
+    }
+
+    single<AnimeRepository> {
+        AnimeRepositoryImpl(
+            apiService = get<AnimeApiService>()
+        )
+    }
+
+    single<MangaRepository> {
+        MangaRepositoryImpl(
+            apiService = get<MangaApiService>()
+        )
+    }
+
+    single<PostRepository> {
+        PostRepositoryImpl(
+            apiService = get<PostApiService>()
+        )
+    }
+
+    single<UserRepository> {
+        UserRepositoryImpl(
+            apiService = get<UserApiService>()
+        )
+    }
+
+    single<AuthRepository> {
+        AuthRepositoryImpl(
+            apiService = get<AuthApiService>()
         )
     }
 

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.kitsuapp.R
 import com.example.kitsuapp.core.base.BaseFragment
+import com.example.kitsuapp.core.extension.showToast
 import com.example.kitsuapp.databinding.BsFilterBinding
 import com.example.kitsuapp.databinding.FragmentMangaBinding
 import com.example.kitsuapp.model.CategoriesDataUI
@@ -58,10 +59,9 @@ class MangaFragment : BaseFragment<FragmentMangaBinding, MangaViewModel>(R.layou
             viewModel.searchBy(it.toString())
         }
 
-        viewModel.getCategoriesState.collectState(
-            onLoading = {},
-            onSuccess = { data -> categoriesAdapter.submitData(data.map { it.toUI() }) },
-            onError = {}
+        viewModel.getCategoriesState.spectateUiState(
+            success = { data -> categoriesAdapter.submitData(data) },
+            error = { showToast(it) }
         )
     }
 

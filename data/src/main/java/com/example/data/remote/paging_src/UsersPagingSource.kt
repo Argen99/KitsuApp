@@ -2,12 +2,12 @@ package com.example.data.remote.paging_src
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.data.remote.api_service.ApiService
+import com.example.data.remote.api_service.UserApiService
 import com.example.data.remote.model.mappers.toModel
 import com.example.domain.model.User
 
 class UsersPagingSource(
-    private val apiService: ApiService,
+    private val apiService: UserApiService,
     private val name: String?
 ) : PagingSource<Int, User>() {
 
