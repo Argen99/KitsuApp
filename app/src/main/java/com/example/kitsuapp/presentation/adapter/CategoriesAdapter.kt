@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.kitsuapp.databinding.ItemCategoriesBinding
 import com.example.kitsuapp.model.CategoriesDataUI
 
+/**
+ * [CategoriesAdapter] Адаптер для отображения категорий
+ */
 class CategoriesAdapter(
     private var list: List<CategoriesDataUI>
 ) : Adapter<CategoriesAdapter.CategoriesViewHolder>() {

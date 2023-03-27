@@ -12,6 +12,11 @@ import com.example.kitsuapp.databinding.FragmentCreatePostBinding
 import com.example.kitsuapp.model.UserUI
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * [CreatePostFragment] Фрагмент для создания нового поста
+ * @author Argen
+ * @since 1.0v
+ */
 class CreatePostFragment :
     BaseFragment<FragmentCreatePostBinding, CreatePostViewModel>(R.layout.fragment_create_post) {
     override val binding by viewBinding(FragmentCreatePostBinding::bind)
@@ -21,43 +26,26 @@ class CreatePostFragment :
 
     override fun setupListeners() {
         binding.tvPost.setOnClickListener {
-            if (user?.id == null) {
-                showToast(getString(R.string.unknown_error))
-            } else if (binding.etContent.text.isNullOrBlank()) {
-                binding.etContent.error = getString(R.string.enter_text)
-            } else {
-                viewModel.createPost(
-                    userId = user!!.id!!,
-                    content = binding.etContent.text.toString(),
-                    nsfw = binding.cbNsfw.isChecked,
-                    spoiler = binding.cbSpoiler.isChecked
-                )
-            }
+            createPost()
         }
-
         binding.tvCancel.setOnClickListener {
             findNavController().navigateUp()
         }
     }
 
+    /**
+     * [setupObservers] Тут опять из за бэка приходится писать фигню (⊙_⊙),
+     * идет запрос на текущего пользователя по никнейму,
+     * [subscribeToUser] в ответе получаем список пользователей с похожими никнеймами
+     *
+     */
     override fun setupObservers() {
         viewModel.getUser("choni17")
+        subscribeToCreatePostState()
+        subscribeToUser()
+    }
 
-        viewModel.getCreatePostState.spectateUiState(
-            loading = {
-                binding.pbCreatePost.visible()
-            },
-            success = {
-                binding.pbCreatePost.gone()
-                showToast("onSuccess")
-                findNavController().navigateUp()
-            },
-            error = {
-                binding.pbCreatePost.gone()
-                showToast(it)
-            }
-        )
-
+    private fun subscribeToUser() {
         viewModel.userFlow.spectateUiState(
             loading = { binding.pbCreatePost.visible() },
             success = { data ->
@@ -74,5 +62,47 @@ class CreatePostFragment :
             },
             error = { showToast(it) }
         )
+    }
+
+    private fun subscribeToCreatePostState() {
+        viewModel.getCreatePostState.spectateUiState(
+            loading = {
+                binding.pbCreatePost.visible()
+            },
+            success = {
+                binding.pbCreatePost.gone()
+                showToast("onSuccess")
+                findNavController().navigateUp()
+            },
+            error = {
+                binding.pbCreatePost.gone()
+                showToast(it)
+            }
+        )
+    }
+
+    /**
+      [createPost] Функция для создания нового поста.
+      Если ID пользователя равен null, то вызывается метод showToast с сообщением "Неизвестная ошибка".
+      Если поле ввода контента пустое или равно null, то устанавливается ошибка в EditText с сообщением "Введите текст".
+      Иначе вызывается метод createPost у экземпляра ViewModel с передачей параметров:
+      userId - ID пользователя,
+      content - контент поста,
+      nsfw - флаг, указывающий на то, является ли пост NSFW,
+      spoiler - флаг, указывающий на то, содержит ли пост спойлеры.
+     */
+    private fun createPost() {
+        if (user?.id == null) {
+            showToast(getString(R.string.unknown_error))
+        } else if (binding.etContent.text.isNullOrBlank()) {
+            binding.etContent.error = getString(R.string.enter_text)
+        } else {
+            viewModel.createPost(
+                userId = user!!.id!!,
+                content = binding.etContent.text.toString(),
+                nsfw = binding.cbNsfw.isChecked,
+                spoiler = binding.cbSpoiler.isChecked
+            )
+        }
     }
 }

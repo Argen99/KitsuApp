@@ -5,13 +5,16 @@ import com.example.data.local.prefs.TokenManager
 import com.example.data.remote.api_service.*
 import com.example.domain.repository.UserRepository
 import com.example.kitsuapp.BuildConfig.BASE_URL
+import com.example.kitsuapp.presentation.fragment.main_flow.create_post.CreatePostFragment
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-
+/**
+ * [networkModule] networkModule
+ */
 val networkModule = module {
     factory { AuthInterceptor(get<TokenManager>()) }
     factory<HttpLoggingInterceptor> {
@@ -26,7 +29,11 @@ val networkModule = module {
     factory { providePostApi(get<Retrofit>()) }
     factory { provideUserApi(get<Retrofit>()) }
 
-    single<MainApiService> {
+    /**
+     * [PostApiService] создается с [AuthInterceptor] так как для того чтобы опубликовать пост
+     * требуется токен, в остальных запросах токен не требуется
+     */
+    single<PostApiService> {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -40,7 +47,7 @@ val networkModule = module {
                     .build()
             )
             .build()
-            .create(MainApiService::class.java)
+            .create(PostApiService::class.java)
     }
 }
 
@@ -75,8 +82,8 @@ fun provideMangaApi(retrofit: Retrofit): MangaApiService {
     return retrofit.create(MangaApiService::class.java)
 }
 
-fun providePostApi(retrofit: Retrofit): PostApiService {
-    return retrofit.create(PostApiService::class.java)
+fun providePostApi(retrofit: Retrofit): MainApiService {
+    return retrofit.create(MainApiService::class.java)
 }
 
 fun provideUserApi(retrofit: Retrofit): UserApiService {

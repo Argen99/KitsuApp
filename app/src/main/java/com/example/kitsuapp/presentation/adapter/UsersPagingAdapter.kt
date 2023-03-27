@@ -9,7 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kitsuapp.core.extension.loadImage
 import com.example.kitsuapp.databinding.ItemUsersBinding
 import com.example.kitsuapp.model.UserUI
+import com.example.kitsuapp.presentation.fragment.main_flow.create_post.CreatePostFragment
 
+/**
+ * [UsersPagingAdapter] Paging Adapter для отображения пользователей
+ */
 class UsersPagingAdapter(
     private val onItemCLick: (id: String) -> Unit,
 ) : PagingDataAdapter<UserUI, UsersPagingAdapter.UsersViewHolder>(diffCallBack) {

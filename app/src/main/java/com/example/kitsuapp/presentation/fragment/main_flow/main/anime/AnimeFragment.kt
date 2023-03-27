@@ -23,6 +23,11 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * [AnimeFragment] Фрагмент для поиска аниме
+ * @author Argen
+ * @since 1.0v
+ */
 class AnimeFragment : BaseFragment<FragmentAnimeBinding, AnimeViewModel>(R.layout.fragment_anime) {
     override val binding by viewBinding(FragmentAnimeBinding::bind)
     override val viewModel by viewModel<AnimeViewModel>()
@@ -38,10 +43,7 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding, AnimeViewModel>(R.layou
     }
 
     override fun initialize() {
-        binding.rvAnime.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = animeAdapter.withLoadStateFooter(DefaultLoadStateAdapter())
-        }
+        constructRecycler()
 
         animeAdapter.addLoadStateListener { state ->
             binding.pbAnime.isVisible = state.source.refresh is LoadState.Loading
@@ -54,23 +56,48 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding, AnimeViewModel>(R.layou
         }
     }
 
+    /**
+     * [setupObservers] наблюдает за Flow,
+     * разворачивая его из [com.example.kitsuapp.core.ui_state.UIState]
+     */
     override fun setupObservers() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.animeFlow.collectLatest { pagingData ->
-                animeAdapter.submitData(pagingData.map { it.toUI() })
-            }
-        }
-
+        subscribeToAnime()
+        subscribeToCategories()
         binding.etSearchAnime.addTextChangedListener {
             viewModel.searchBy(it.toString())
         }
+    }
 
+    private fun constructRecycler() {
+        binding.rvAnime.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = animeAdapter.withLoadStateFooter(DefaultLoadStateAdapter())
+        }
+    }
+
+    private fun subscribeToCategories() {
         viewModel.getCategoriesState.spectateUiState(
             success = { data -> categoriesAdapter.submitData(data) },
             error = { showToast(it) }
         )
     }
 
+    private fun subscribeToAnime() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.animeFlow.collectLatest { pagingData ->
+                animeAdapter.submitData(pagingData.map { it.toUI() })
+            }
+        }
+    }
+
+    private fun onItemClick(id: String) {
+        showToast(id)
+    }
+
+    /**
+     * [showBottomSheet] BottomSheet для фильтрации по категориям.
+     * Автоматически при инициализации viewmodel происходит запрос на категории и хранятся в [categoriesList]
+     */
     private fun showBottomSheet() {
         val filerBinding = BsFilterBinding.inflate(layoutInflater)
         val bottomSheet = BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
@@ -94,9 +121,5 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding, AnimeViewModel>(R.layou
 
         bottomSheet.setContentView(filerBinding.root)
         bottomSheet.show()
-    }
-
-    private fun onItemClick(id: String) {
-
     }
 }

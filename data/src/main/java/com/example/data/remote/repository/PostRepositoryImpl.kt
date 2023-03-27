@@ -3,7 +3,7 @@ package com.example.data.remote.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.data.core.base.BaseRepository
+import com.example.data.core.base.makeNetworkRequest
 import com.example.data.remote.api_service.PostApiService
 import com.example.data.remote.model.*
 import com.example.data.remote.paging_src.PostsPagingSource
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 
 class PostRepositoryImpl(
     private val apiService: PostApiService
-) : BaseRepository(), PostRepository {
+) : PostRepository {
 
     override fun getPosts(): Flow<PagingData<PostsData>> {
         return Pager(
@@ -34,7 +34,7 @@ class PostRepositoryImpl(
         content: String,
         nsfw: Boolean,
         spoiler: Boolean
-    ): Flow<Either<String ,Unit>> = makeNetworkRequest {
+    ): Flow<Either<String, Unit>> = makeNetworkRequest {
         apiService.createPost(
             CreatePostDto(
                 CreatePostDataDto(

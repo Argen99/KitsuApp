@@ -18,6 +18,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * [BaseFragment] Абстрактный класс BaseFragment является базовым классом для всех фрагментов
+ * в приложении и содержит общую логику, которую можно переопределить в наследниках.
+ */
 abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel>(
     @LayoutRes private val layoutRes: Int
 ) : Fragment(layoutRes) {
@@ -30,17 +34,36 @@ abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel>(
 
         initialize()
         setupRequest()
-        performListeners()
         setupObservers()
         setupListeners()
     }
 
+    /**
+     * [initialize] метод, который вызывается при создании фрагмента и может быть переопределен
+     * в наследниках, чтобы инициализировать какие-либо необходимые данные или переменные.
+     */
     protected open fun initialize() {}
+    /**
+     * [setupRequest] метод, который вызывается после инициализации и может быть переопределен в
+     * наследниках, чтобы установить какие-либо запросы к серверу или базе данных.
+     */
     protected open fun setupRequest() {}
-    protected open fun performListeners() {}
+    /**
+     * [setupObservers] setupObservers() - метод, который вызывается после установки слушателей
+     * и может быть переопределен в наследниках, чтобы установить наблюдателей за данными,
+     * получаемыми из ViewModel или других источников.
+     */
     protected open fun setupObservers() {}
+    /**
+     * [setupListeners] метод, который вызывается после установки запросов и может быть переопределен
+     * в наследниках, чтобы установить слушатели для каких-либо View или других элементов
+     * пользовательского интерфейса.
+     */
     protected open fun setupListeners() {}
 
+    /**
+     * [safeFlowGather] для безопасной работы с жизненным циклом фрагмента
+     */
     private fun safeFlowGather(
         lifecycleState: Lifecycle.State = Lifecycle.State.STARTED,
         gather: suspend () -> Unit,
@@ -52,6 +75,11 @@ abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel>(
         }
     }
 
+    /**
+     * [spectatePaging] spectatePaging используется для слежения за изменениями данных
+     * с помощью Paging Library. Она принимает объект Flow<PagingData<T>> и вызывает
+     * обработчик успешного получения данных.
+     */
     protected fun <T : Any> Flow<PagingData<T>>.spectatePaging(
         lifecycleState: Lifecycle.State = Lifecycle.State.STARTED,
         success: suspend (data: PagingData<T>) -> Unit,
@@ -63,6 +91,11 @@ abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel>(
         }
     }
 
+    /**
+     * [spectateUiState] spectateUiState используется для слежения за изменениями состояния
+     * пользовательского интерфейса. Она принимает объект StateFlow<UIState<T>> и вызывает
+     * обработчики событий в зависимости от текущего состояния.
+     */
     protected fun <T> StateFlow<UIState<T>>.spectateUiState(
         lifecycleState: Lifecycle.State = Lifecycle.State.STARTED,
         success: ((data: T) -> Unit)? = null,
@@ -87,33 +120,6 @@ abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel>(
                     is UIState.Success -> {
                         success?.invoke(it.data)
                     }
-                }
-            }
-        }
-    }
-
-    protected fun <T> UIState<T>.assembleViewVisibility(
-        group: Group,
-        loader: CircularProgressIndicator,
-        navigationSucceed: Boolean = false,
-    ) {
-        fun displayLoader(isDisplayed: Boolean) {
-            group.isVisible = !isDisplayed
-            loader.isVisible = isDisplayed
-        }
-        when (this) {
-            is UIState.Idle -> {}
-            is UIState.Loading -> {
-                displayLoader(true)
-            }
-            is UIState.Error -> {
-                displayLoader(false)
-            }
-            is UIState.Success -> {
-                if (navigationSucceed) {
-                    displayLoader(true)
-                } else {
-                    displayLoader(false)
                 }
             }
         }

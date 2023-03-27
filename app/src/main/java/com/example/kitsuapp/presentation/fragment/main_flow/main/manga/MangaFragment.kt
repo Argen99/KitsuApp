@@ -23,6 +23,11 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * [MangaFragment] Фрагмент для поиска манги
+ * @author Argen
+ * @since 1.0v
+ */
 class MangaFragment : BaseFragment<FragmentMangaBinding, MangaViewModel>(R.layout.fragment_manga) {
     override val binding by viewBinding(FragmentMangaBinding::bind)
     override val viewModel by viewModel<MangaViewModel>()
@@ -38,31 +43,23 @@ class MangaFragment : BaseFragment<FragmentMangaBinding, MangaViewModel>(R.layou
     }
 
     override fun initialize() {
-        binding.rvManga.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = mangaAdapter.withLoadStateFooter(DefaultLoadStateAdapter())
-        }
+        constructRecycler()
 
         mangaAdapter.addLoadStateListener { state ->
             binding.pbManga.isVisible = state.source.refresh is LoadState.Loading
         }
     }
 
+    /**
+     * [setupObservers] наблюдает за Flow,
+     * разворачивая его из [com.example.kitsuapp.core.ui_state.UIState]
+     */
     override fun setupObservers() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.mangaFlow.collectLatest { pagingData ->
-                mangaAdapter.submitData(pagingData.map { it.toUI() })
-            }
-        }
-
+        subscribeToManga()
+        subscribeToCategories()
         binding.etSearchManga.addTextChangedListener {
             viewModel.searchBy(it.toString())
         }
-
-        viewModel.getCategoriesState.spectateUiState(
-            success = { data -> categoriesAdapter.submitData(data) },
-            error = { showToast(it) }
-        )
     }
 
     override fun setupListeners() {
@@ -71,6 +68,36 @@ class MangaFragment : BaseFragment<FragmentMangaBinding, MangaViewModel>(R.layou
         }
     }
 
+    private fun constructRecycler() {
+        binding.rvManga.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = mangaAdapter.withLoadStateFooter(DefaultLoadStateAdapter())
+        }
+    }
+
+    private fun subscribeToCategories() {
+        viewModel.getCategoriesState.spectateUiState(
+            success = { data -> categoriesAdapter.submitData(data) },
+            error = { showToast(it) }
+        )
+    }
+
+    private fun subscribeToManga() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.mangaFlow.collectLatest { pagingData ->
+                mangaAdapter.submitData(pagingData.map { it.toUI() })
+            }
+        }
+    }
+
+    private fun onItemClick(id: String) {
+        showToast(id)
+    }
+
+    /**
+     * [showBottomSheet] BottomSheet для фильтрации по категориям.
+     * Автоматически при создании viewmodel происходит запрос на категории и хранятся в [categoriesList]
+     */
     private fun showBottomSheet() {
         val filerBinding = BsFilterBinding.inflate(layoutInflater)
         val bottomSheet = BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
@@ -94,9 +121,5 @@ class MangaFragment : BaseFragment<FragmentMangaBinding, MangaViewModel>(R.layou
 
         bottomSheet.setContentView(filerBinding.root)
         bottomSheet.show()
-    }
-
-    private fun onItemClick(id: String) {
-
     }
 }

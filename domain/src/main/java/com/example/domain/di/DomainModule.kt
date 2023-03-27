@@ -4,8 +4,10 @@ import com.example.domain.repository.*
 import com.example.domain.use_cases.*
 import org.koin.dsl.module
 
+/**
+ * [domainModule] koin module для зависимостей domain модуля
+ */
 val domainModule = module {
-
     factory<GetAnimeUseCase> {
         GetAnimeUseCase(repository = get<AnimeRepository>())
     }

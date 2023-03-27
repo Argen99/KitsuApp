@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.kitsuapp.R
 import com.example.kitsuapp.core.base.BaseFragment
+import com.example.kitsuapp.core.extension.showToast
 import com.example.kitsuapp.databinding.FragmentUsersBinding
 import com.example.kitsuapp.model.mappers.toUI
 import com.example.kitsuapp.presentation.adapter.DefaultLoadStateAdapter
@@ -17,6 +18,11 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * [UsersFragment] Фрагмент для поиска пользователей
+ * @author Argen
+ * @since 1.0v
+ */
 class UsersFragment : BaseFragment<FragmentUsersBinding, UsersViewModel>(R.layout.fragment_users) {
     override val binding by viewBinding(FragmentUsersBinding::bind)
     override val viewModel by viewModel<UsersViewModel>()
@@ -26,13 +32,7 @@ class UsersFragment : BaseFragment<FragmentUsersBinding, UsersViewModel>(R.layou
     }
 
     override fun initialize() {
-        binding.rvUsers.apply {
-            layoutManager = LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.VERTICAL, false
-            )
-            adapter = usersAdapter.withLoadStateFooter(DefaultLoadStateAdapter())
-        }
+        constructRecycler()
 
         usersAdapter.addLoadStateListener { state ->
             binding.pbUsers.isVisible = state.source.refresh is LoadState.Loading
@@ -40,11 +40,7 @@ class UsersFragment : BaseFragment<FragmentUsersBinding, UsersViewModel>(R.layou
     }
 
     override fun setupObservers() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.usersFlow.collectLatest { pagingData ->
-                usersAdapter.submitData(pagingData.map { it.toUI() })
-            }
-        }
+        subscribeToUsers()
     }
 
     override fun setupListeners() {
@@ -53,7 +49,25 @@ class UsersFragment : BaseFragment<FragmentUsersBinding, UsersViewModel>(R.layou
         }
     }
 
-    private fun onItemClick(id: String) {
+    private fun constructRecycler() {
+        binding.rvUsers.apply {
+            layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.VERTICAL, false
+            )
+            adapter = usersAdapter.withLoadStateFooter(DefaultLoadStateAdapter())
+        }
+    }
 
+    private fun subscribeToUsers() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.usersFlow.collectLatest { pagingData ->
+                usersAdapter.submitData(pagingData.map { it.toUI() })
+            }
+        }
+    }
+
+    private fun onItemClick(id: String) {
+        showToast(id)
     }
 }

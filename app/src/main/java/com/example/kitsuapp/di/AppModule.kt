@@ -10,6 +10,9 @@ import com.example.kitsuapp.presentation.fragment.sign_flow.login.LoginViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+/**
+ * [appModule] koin module для зависимостей app модуля
+ */
 val appModule = module {
 
     viewModel<MainViewModel> {

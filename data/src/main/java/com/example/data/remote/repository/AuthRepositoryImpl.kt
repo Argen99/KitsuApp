@@ -1,6 +1,6 @@
 package com.example.data.remote.repository
 
-import com.example.data.core.base.BaseRepository
+import com.example.data.core.base.makeNetworkRequest
 import com.example.data.remote.api_service.AuthApiService
 import com.example.data.remote.model.LoginRequestDto
 import com.example.data.remote.model.mappers.toModel
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 class AuthRepositoryImpl(
     private val apiService: AuthApiService
-) : BaseRepository(), AuthRepository {
+) : AuthRepository {
 
     override fun login(username: String, password: String): Flow<Either<String ,LoginResponse>> =
         makeNetworkRequest {

@@ -8,6 +8,9 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kitsuapp.databinding.ItemLoaderBinding
 
+/**
+ * [DefaultLoadStateAdapter] DefaultLoadStateAdapter для отображения состояния адаптера
+ */
 class DefaultLoadStateAdapter(
 ) : LoadStateAdapter<DefaultLoadStateAdapter.CharacterLoadStateHolder>() {
 

@@ -3,7 +3,7 @@ package com.example.data.remote.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.data.core.base.BaseRepository
+import com.example.data.core.base.makeNetworkRequest
 import com.example.data.remote.api_service.UserApiService
 import com.example.data.remote.model.mappers.toModel
 import com.example.data.remote.paging_src.UsersPagingSource
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 
 class UserRepositoryImpl(
     private val apiService: UserApiService
-) : BaseRepository(), UserRepository {
+) : UserRepository {
 
     override fun getUsers(name: String?): Flow<PagingData<User>> {
         return Pager(

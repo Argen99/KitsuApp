@@ -9,6 +9,9 @@ import com.example.kitsuapp.core.extension.loadImage
 import com.example.kitsuapp.databinding.ItemAnimeBinding
 import com.example.kitsuapp.model.DataUI
 
+/**
+ * [AnimePagingAdapter] Paging Adapter для отображения anime и manga
+ */
 class AnimePagingAdapter(
     private val onItemCLick: (id: String) -> Unit,
 ) : PagingDataAdapter<DataUI, AnimePagingAdapter.AnimeViewHolder>(diffCallBack) {

@@ -7,9 +7,15 @@ import com.example.kitsuapp.core.base.BaseFragment
 import com.example.kitsuapp.core.extension.*
 import com.example.kitsuapp.databinding.FragmentLoginBinding
 import com.example.kitsuapp.model.LoginResponseUI
+import com.example.kitsuapp.presentation.fragment.main_flow.main.MainFragment
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * [LoginFragment] Фрагмент для авторизации пользователя
+ * @author Argen
+ * @since 1.0v
+ */
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layout.fragment_login) {
     override val binding by viewBinding(FragmentLoginBinding::bind)
     override val viewModel by viewModel<LoginViewModel>()
@@ -20,6 +26,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layou
         binding.btnLogin.setOnClickListener {
             login()
         }
+    }
+
+    override fun setupObservers() {
+        subscribeToLoginState()
     }
 
     private fun login() = with(binding) {
@@ -35,11 +45,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layou
         }
     }
 
-    override fun setupObservers() {
+    /**
+     * [subscribeToLoginState] наблюдает за Flow,
+     * разворачивая его из [com.example.kitsuapp.core.ui_state.UIState]
+     */
+    private fun subscribeToLoginState() {
         viewModel.getLoginState.spectateUiState(
-            loading = {binding.pbLogin.visible()},
-            success = {onSuccessLogin(it)},
-            error = {binding.pbLogin.gone(); showToast(getString(R.string.wrong_username))}
+            loading = {
+                binding.pbLogin.visible()
+            },
+            success = {
+                onSuccessLogin(it)
+            },
+            error = {
+                binding.pbLogin.gone()
+                showToast(getString(R.string.wrong_username))
+            }
         )
     }
 

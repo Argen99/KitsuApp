@@ -3,7 +3,6 @@ package com.example.data.remote.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.data.core.base.BaseRepository
 import com.example.data.remote.api_service.AnimeApiService
 import com.example.data.remote.paging_src.AnimePagingSource
 import com.example.domain.model.Data
@@ -12,7 +11,8 @@ import kotlinx.coroutines.flow.Flow
 
 class AnimeRepositoryImpl(
     private val apiService: AnimeApiService
-): BaseRepository(), AnimeRepository {
+): AnimeRepository {
+
 
     override fun getAnime(text: String?, categories: List<String>?): Flow<PagingData<Data>> {
         return Pager(

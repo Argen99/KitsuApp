@@ -6,6 +6,9 @@ import com.example.data.remote.repository.*
 import com.example.domain.repository.*
 import org.koin.dsl.module
 
+/**
+ * [dataModule] koin module для зависимостей data модуля
+ */
 val dataModule = module {
     single<MainRepository> {
         MainRepositoryImpl(

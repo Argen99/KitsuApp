@@ -9,7 +9,8 @@ interface PostApiService {
     @GET("api/edge/posts")
     suspend fun getPosts(
         @Query("page[limit]") limit: Int,
-        @Query("page[offset]") offset: Int
+        @Query("page[offset]") offset: Int,
+        @Query("sort") sort: String = "createdAt"
     ): PostsResponseDto
 
     @Headers("Content-Type: application/vnd.api+json")

@@ -11,6 +11,9 @@ import com.example.kitsuapp.core.extension.visible
 import com.example.kitsuapp.databinding.ItemPostsBinding
 import com.example.kitsuapp.model.PostsDataUI
 
+/**
+ * [PostsPagingAdapter] Paging Adapter для отображения постов
+ */
 class PostsPagingAdapter(
     private val onItemCLick: (id: String) -> Unit,
 ) : PagingDataAdapter<PostsDataUI, PostsPagingAdapter.AnimeViewHolder>(diffCallBack) {

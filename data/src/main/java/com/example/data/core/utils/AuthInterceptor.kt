@@ -8,10 +8,23 @@ import okhttp3.ResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody
 import java.net.ProtocolException
 
+/**
+ * [AuthInterceptor] Этот класс используется для добавления заголовка авторизации к запросу на сервер.
+ * [tokenManager] - менеджер токенов, используемый для получения доступа к токенам авторизации.
+ */
 class AuthInterceptor(
     private val tokenManager: TokenManager
 ) : Interceptor {
 
+    /**
+     * В методе [intercept] создается объект Request на основе полученного объекта Chain,
+     * затем проверяется наличие заголовка авторизации в запросе. Если заголовок не установлен,
+     * то берется токен доступа из [tokenManager], и заголовок добавляется к запросу.
+     *
+     * Далее, если возникает исключение ProtocolException, то возвращается фиктивный объект
+     * Response с пустым телом и кодом 200. В противном случае, метод proceed() продолжает обработку
+     * запроса и возвращает объект Response.
+     */
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val builder = request.newBuilder()
@@ -23,7 +36,6 @@ class AuthInterceptor(
                 )
             }
         }
-
         return try {
             chain.proceed(builder.build())
         } catch (e: ProtocolException) {
