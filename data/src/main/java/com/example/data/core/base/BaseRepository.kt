@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 /**
- * [makeNetworkRequest] Функция makeNetworkRequest используется для выполнения сетевых запросов и возвращает
- * Flow, который эмитит Either значение с результатом выполнения запроса или с ошибкой,
+ * [makeNetworkRequest] Функция makeNetworkRequest используется для выполнения сетевых запросов и
+ * возвращает Flow, который эмитит Either значение с результатом выполнения запроса или с ошибкой,
  * если запрос завершается неудачно.
  */
 internal fun <T> makeNetworkRequest(

@@ -12,10 +12,19 @@ import com.example.domain.model.PostsData
 import com.example.domain.repository.PostRepository
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * [PostRepositoryImpl] Класс PostRepositoryImpl является реализацией интерфейса [PostRepository].
+ * Он использует сервис API [PostApiService] для получения данных и отправки запросов.
+ */
 class PostRepositoryImpl(
     private val apiService: PostApiService
 ) : PostRepository {
-
+    /**
+     * Метод [getPosts] возвращает объект Flow<PagingData<PostsData>> для постраничного получения
+     * данных о постах. Он использует объект Pager для настройки параметров постраничного получения
+     * и pagingSourceFactory для создания объекта PostsPagingSource, который реализует
+     * загрузку страниц данных.
+     */
     override fun getPosts(): Flow<PagingData<PostsData>> {
         return Pager(
             config = PagingConfig(
@@ -29,6 +38,11 @@ class PostRepositoryImpl(
         ).flow
     }
 
+    /**
+     * Метод [createPost] отправляет запрос на создание нового поста с заданным содержанием, флагами
+     * NSFW и SPOILER и идентификатором пользователя. Он возвращает объект Flow<Either<String, Unit>>,
+     * который содержит результат выполнения операции создания поста.
+     */
     override fun createPost(
         userId: String,
         content: String,

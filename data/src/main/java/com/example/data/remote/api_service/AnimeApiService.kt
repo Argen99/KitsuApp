@@ -4,6 +4,9 @@ import com.example.data.remote.model.AnimeResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+/**
+ * [AnimeApiService] Api Service для работы с аниме
+ */
 interface AnimeApiService {
     @GET("api/edge/anime")
     suspend fun getAnime(

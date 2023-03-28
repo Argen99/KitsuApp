@@ -3,7 +3,9 @@ package com.example.data.remote.api_service
 import com.example.data.remote.model.AnimeResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Query
-
+/**
+ * [MangaApiService] Api Service для работы с манга
+ */
 interface MangaApiService {
     @GET("api/edge/manga")
     suspend fun getManga(

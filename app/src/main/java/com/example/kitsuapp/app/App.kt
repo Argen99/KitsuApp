@@ -10,7 +10,7 @@ import org.koin.core.context.startKoin
 
 /**
  * [App] Класс App наследуется от Application и используется для настройки и инициализации
- * приложения. В методе onCreate() инициализируется Koin - фреймворк для управления зависимостями.
+ * приложения. В методе onCreate() инициализируется Koin
  */
 class App : Application() {
 

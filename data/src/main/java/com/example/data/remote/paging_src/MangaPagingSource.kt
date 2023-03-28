@@ -8,7 +8,7 @@ import com.example.data.remote.model.mappers.toModel
 import com.example.domain.model.Data
 /**
  * Класс [MangaPagingSource] реализует PagingSource, который является источником данных для
- * PagingData. Он загружает страницы данных из удаленного сервера и конвертирует их в Data объекты.
+ * PagingData. Он загружает страницы данных из сервера и конвертирует их в Data объекты.
  * Конструктор класса MangaPagingSource принимает [MangaApiService], текст для фильтрации и
  * список категорий для фильтрации.
  */
