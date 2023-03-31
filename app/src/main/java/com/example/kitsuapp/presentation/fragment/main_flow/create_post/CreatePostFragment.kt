@@ -13,7 +13,9 @@ import com.example.kitsuapp.model.UserUI
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
- * [CreatePostFragment] Фрагмент для создания нового поста
+ * [CreatePostFragment] наследуется от [BaseFragment] и содержит реализацию функционала
+ * создания поста. Он также содержит приватную переменную user, которая используется для
+ * получения информации о пользователе, создающем пост.
  * @author Argen
  * @since 1.0v
  */
@@ -24,6 +26,9 @@ class CreatePostFragment :
 
     private var user: UserUI? = null
 
+    /**
+     * Метод [setupListeners] используется для настройки обработчиков событий пользовательского ввода.
+    */
     override fun setupListeners() {
         binding.tvPost.setOnClickListener {
             createPost()
@@ -37,7 +42,6 @@ class CreatePostFragment :
      * [setupObservers] Тут опять из за бэка приходится писать фигню (⊙_⊙),
      * идет запрос на текущего пользователя по никнейму,
      * [subscribeToUser] в ответе получаем список пользователей с похожими никнеймами
-     *
      */
     override fun setupObservers() {
         viewModel.getUser("choni17")
@@ -45,6 +49,12 @@ class CreatePostFragment :
         subscribeToUser()
     }
 
+    /**
+     * Метод [subscribeToUser] используется для подписки на изменения состояний при получении
+    * информации о пользователе. Если получение происходит успешно, то происходит заполнение
+    * полей фрагмента информацией о пользователе. Если получение происходит неудачно,
+    * то выводится сообщение об ошибке.
+     */
     private fun subscribeToUser() {
         viewModel.userFlow.spectateUiState(
             loading = { binding.pbCreatePost.visible() },
@@ -64,6 +74,11 @@ class CreatePostFragment :
         )
     }
 
+    /**
+     * Метод [subscribeToCreatePostState] используется для подписки на изменения состояний при
+     * создании поста. Если создание поста происходит успешно, то происходит перенаправление на
+     * предыдущий экран. Если создание поста происходит неудачно, то выводится сообщение об ошибке.
+     */
     private fun subscribeToCreatePostState() {
         viewModel.getCreatePostState.spectateUiState(
             loading = {
@@ -83,8 +98,8 @@ class CreatePostFragment :
 
     /**
       [createPost] Функция для создания нового поста.
-      Если ID пользователя равен null, то вызывается метод showToast с сообщением "Неизвестная ошибка".
-      Если поле ввода контента пустое или равно null, то устанавливается ошибка в EditText с сообщением "Введите текст".
+      Если ID пользователя равен null то выводится сообщение об ошибке.
+      Если поле ввода контента пустое или равно null, выводится сообщение об ошибке.
       Иначе вызывается метод createPost у экземпляра ViewModel с передачей параметров:
       userId - ID пользователя,
       content - контент поста,
@@ -106,3 +121,5 @@ class CreatePostFragment :
         }
     }
 }
+
+

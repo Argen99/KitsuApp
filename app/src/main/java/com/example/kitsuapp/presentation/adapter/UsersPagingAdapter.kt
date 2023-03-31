@@ -9,10 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kitsuapp.core.extension.loadImage
 import com.example.kitsuapp.databinding.ItemUsersBinding
 import com.example.kitsuapp.model.UserUI
+import com.example.kitsuapp.presentation.adapter.AnimePagingAdapter.Companion.diffCallBack
 import com.example.kitsuapp.presentation.fragment.main_flow.create_post.CreatePostFragment
 
 /**
- * [UsersPagingAdapter] Paging Adapter для отображения пользователей
+ * Класс [AnimePagingAdapter] является адаптером для RecyclerView, который используется
+ * для отображения списка пользователей. Он реализует интерфейс PagingDataAdapter для поддержки
+ * функциональности постраничной загрузки данных, и принимает лямбду [onItemCLick] для обработки
+ * нажатий на элементы списка.
  */
 class UsersPagingAdapter(
     private val onItemCLick: (id: String) -> Unit,
@@ -46,6 +50,11 @@ class UsersPagingAdapter(
         }
     }
 
+    /**
+     * [diffCallBack] - это объект, реализующий интерфейс DiffUtil.ItemCallback, который используется
+     * для определения того, что является новым элементом в списке. Он сравнивает элементы по id и
+     * содержанию, чтобы определить, нужно ли обновлять элемент в списке при изменении данных.
+     */
     companion object {
         val diffCallBack = object : DiffUtil.ItemCallback<UserUI>() {
             override fun areItemsTheSame(oldItem: UserUI, newItem: UserUI): Boolean {

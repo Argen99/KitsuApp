@@ -12,14 +12,18 @@ import com.example.kitsuapp.core.base.BaseFragment
 import com.example.kitsuapp.core.extension.showToast
 import com.example.kitsuapp.databinding.FragmentUsersBinding
 import com.example.kitsuapp.model.mappers.toUI
+import com.example.kitsuapp.presentation.adapter.AnimePagingAdapter
 import com.example.kitsuapp.presentation.adapter.DefaultLoadStateAdapter
 import com.example.kitsuapp.presentation.adapter.UsersPagingAdapter
+import com.example.kitsuapp.presentation.fragment.main_flow.main.anime.AnimeFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
- * [UsersFragment] Фрагмент для поиска пользователей
+ * [UsersFragment] UsersFragment наследуется от [BaseFragment], который содержит общую
+ * логику для фрагментов в приложении и представляет собой фрагмент
+ * отображающий список пользователей
  * @author Argen
  * @since 1.0v
  */
@@ -30,7 +34,9 @@ class UsersFragment : BaseFragment<FragmentUsersBinding, UsersViewModel>(R.layou
     private val usersAdapter: UsersPagingAdapter by lazy {
         UsersPagingAdapter(this::onItemClick)
     }
-
+    /**
+     * [initialize] используется для инициализации элементов пользовательского интерфейса.
+     */
     override fun initialize() {
         constructRecycler()
 
@@ -38,17 +44,25 @@ class UsersFragment : BaseFragment<FragmentUsersBinding, UsersViewModel>(R.layou
             binding.pbUsers.isVisible = state.source.refresh is LoadState.Loading
         }
     }
-
+    /**
+     * [setupObservers] метод для наблюдания за данными,
+     * получаемыми из ViewModel.
+     */
     override fun setupObservers() {
         subscribeToUsers()
     }
-
+    /**
+     * [setupListeners] используется чтобы установить слушатели для каких-либо View или
+     * других элементов пользовательского интерфейса.
+     */
     override fun setupListeners() {
         binding.etSearchUser.addTextChangedListener {
             viewModel.searchBy(it.toString())
         }
     }
-
+    /**
+     * [constructRecycler] настраивает RecyclerView с помощью LayoutManager и адаптера.
+     */
     private fun constructRecycler() {
         binding.rvUsers.apply {
             layoutManager = LinearLayoutManager(
@@ -58,7 +72,10 @@ class UsersFragment : BaseFragment<FragmentUsersBinding, UsersViewModel>(R.layou
             adapter = usersAdapter.withLoadStateFooter(DefaultLoadStateAdapter())
         }
     }
-
+    /**
+     * [subscribeToUsers] подписывается на flow и обновляет
+     * [UsersPagingAdapter] при получении новых данных.
+     */
     private fun subscribeToUsers() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.usersFlow.collectLatest { pagingData ->
@@ -66,7 +83,10 @@ class UsersFragment : BaseFragment<FragmentUsersBinding, UsersViewModel>(R.layou
             }
         }
     }
-
+    /**
+     * [onItemClick] вызывается при нажатии на элемент списка
+     * аниме и отображает идентификатор выбранного элемента
+     */
     private fun onItemClick(id: String) {
         showToast(id)
     }

@@ -15,15 +15,22 @@ import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
- * [MainFragment] Фрагмент отвечает за отображение TabLayout с 4 фрагментами
- * - AnimeFragment, MangaFragment, UsersFragment и PostsFragment.
+ * [MainFragment] Класс MainFragment является подклассом [BaseFragment] и отвечает за управление
+ * главным экраном приложения. Он показывает ViewPager с четырьмя разными вкладками,
+ * каждая из которых содержит свой фрагмент.
  * @author Argen
  * @since 1.0v
  */
 class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(R.layout.fragment_main) {
+    /** Экземпляр binding для макета этого фрагмента. */
     override val binding by viewBinding(FragmentMainBinding::bind)
+    /** Экземпляр view model для этого фрагмента. */
     override val viewModel by viewModel<MainViewModel>()
 
+
+    /**
+     * [initialize] Инициализирует представления фрагмента
+     */
     override fun initialize() {
         val pagerAdapter = FragmentPagerAdapter(requireActivity())
 
@@ -36,7 +43,9 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(R.layout.f
         TabLayoutMediator(binding.tabLayout, binding.fragmentPager) { tab, position ->
             tab.text = pagerAdapter.getTabTitle(position)
         }.attach()
-
+        /**
+         *  // Добавляет обратный вызов для события нажатия кнопки "назад", завершающий активность при нажатии.
+         */
         requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 requireActivity().finish()
@@ -45,7 +54,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(R.layout.f
     }
 
     /**
-     * [addFragments] добавляются фрагменты и их заголовки
+     * [addFragments] Добавляет фрагменты и их заголовки в ViewPager.
      */
     private fun addFragments(pagerAdapter: FragmentPagerAdapter) {
         pagerAdapter.addFragment(

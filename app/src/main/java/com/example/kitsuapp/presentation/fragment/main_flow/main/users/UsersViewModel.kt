@@ -6,23 +6,39 @@ import androidx.paging.cachedIn
 import com.example.domain.model.User
 import com.example.domain.use_cases.GetUsersUseCase
 import com.example.kitsuapp.core.base.BaseViewModel
-import com.example.kitsuapp.model.UserUI
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
 
+/**
+ * Класс [UsersViewModel] представляет viewModel для [UsersFragment], который содержит логику для получения
+ * списка пользователей. Он также наследует класс [BaseViewModel].
+ */
 @OptIn(ExperimentalCoroutinesApi::class)
 class UsersViewModel(
     private val getUsersUseCase: GetUsersUseCase
 ) : BaseViewModel() {
 
+    /**
+     * [usersFlow] Возвращает экземпляр Flow<PagingData<User>>, который представляет список
+     * пользователей с возможностью постраничной загрузки.
+     */
     val usersFlow: Flow<PagingData<User>>
-    private val searchBy = MutableStateFlow("")
 
+    /**
+     * [searchByS] возвращает экземпляр MutableStateFlow<String>, который хранит значение для
+     * поиска пользователей.
+     */
+    private val searchByS = MutableStateFlow("")
+
+    /**
+     * [init] блок инициализации [UsersViewModel] Инициализирует usersFlow с помощью flatMapLatest,
+     * который отслеживает изменения в searchBy и отправляет запрос на получение пользователей
+     * в зависимости от того, является ли строка поиска пустой или нет.
+     */
     init {
-        usersFlow = searchBy.flatMapLatest { name ->
+        usersFlow = searchByS.flatMapLatest { name ->
             if (name.isBlank()) {
                 getUsersUseCase(null)
                     .cachedIn(viewModelScope)
@@ -33,8 +49,11 @@ class UsersViewModel(
         }
     }
 
+    /**
+     * Устанавливает новое значение для [searchByS], если оно отличается от текущего значения.
+     */
     fun searchBy(value: String) {
-        if (searchBy.value == value) return
-        searchBy.value = value
+        if (searchByS.value == value) return
+        searchByS.value = value
     }
 }

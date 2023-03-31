@@ -18,9 +18,14 @@ class TokenManager(context: Context) {
         get() = prefs.getString(USER_REFRESH_TOKEN, null)
         set(value) = prefs.edit().putString(USER_REFRESH_TOKEN, value).apply()
 
+    var onBoardIsShown: Boolean
+        get() = prefs.getBoolean(ON_BOARD, false)
+        set(value) = prefs.edit().putBoolean(ON_BOARD, value).apply()
+
     companion object {
         const val PREFS_TOKEN_FILE = "PREFS_TOKEN_FILE"
         const val USER_ACCESS_TOKEN = "USER_ACCESS_TOKEN"
         const val USER_REFRESH_TOKEN = "USER_REFRESH_TOKEN"
+        const val ON_BOARD = "ON_BOARD"
     }
 }

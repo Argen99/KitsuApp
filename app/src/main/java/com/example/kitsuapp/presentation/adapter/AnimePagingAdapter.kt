@@ -10,7 +10,10 @@ import com.example.kitsuapp.databinding.ItemAnimeBinding
 import com.example.kitsuapp.model.DataUI
 
 /**
- * [AnimePagingAdapter] Paging Adapter для отображения anime и manga
+ * [AnimePagingAdapter] Класс [AnimePagingAdapter] является адаптером для RecyclerView, который используется
+ * для отображения списка аниме. Он реализует интерфейс PagingDataAdapter для поддержки
+ * функциональности постраничной загрузки данных, и принимает лямбду [onItemCLick] для обработки
+ * нажатий на элементы списка.
  */
 class AnimePagingAdapter(
     private val onItemCLick: (id: String) -> Unit,
@@ -40,6 +43,11 @@ class AnimePagingAdapter(
         }
     }
 
+    /**
+     * [diffCallBack] - это объект, реализующий интерфейс DiffUtil.ItemCallback, который используется
+      * для определения того, что является новым элементом в списке. Он сравнивает элементы по id и
+      * содержанию, чтобы определить, нужно ли обновлять элемент в списке при изменении данных.
+     */
     companion object {
         val diffCallBack = object : DiffUtil.ItemCallback<DataUI>() {
             override fun areItemsTheSame(oldItem: DataUI, newItem: DataUI): Boolean {
@@ -52,3 +60,4 @@ class AnimePagingAdapter(
         }
     }
 }
+

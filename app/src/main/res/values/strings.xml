@@ -33,4 +33,15 @@
     <string name="app_icon">app icon</string>
     <string name="unknown_error">Unknown error</string>
     <string name="enter_text">Enter text</string>
+    <string name="start">start</string>
+
+    <string name="on_board_desc_main">On the main screen of the Kitsu app, you can easily find and track your favorite anime and manga. You can also use the search bar to find any anime or manga by title or author.</string>
+    <string name="on_board_desc_details">When you select an anime or manga, you are taken to the details page. Here you can see the cover, description, rating, genres, and number of episodes (for anime) or chapters (for manga). You can also find out information about the author and the animation studio that produced the anime.</string>
+    <string name="on_board_desc_posts">You can find interesting posts from other Kitsu users on the posts page, which may include reviews of anime and manga, news from the world of anime industry, and anime-related memes and jokes.</string>
+
+    <string name="on_board_title_main">Main Screen</string>
+    <string name="on_board_title_details">Details</string>
+    <string name="on_board_title_posts">Posts</string>
+    <string name="skip">Skip</string>
+
 </resources>

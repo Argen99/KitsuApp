@@ -1,5 +1,6 @@
 package com.example.kitsuapp.presentation.fragment.sign_flow.login
 
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.data.local.prefs.TokenManager
 import com.example.kitsuapp.R
@@ -22,16 +23,32 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layou
 
     private val tokenManager: TokenManager by inject()
 
+    override fun initialize() {
+        if (!tokenManager.onBoardIsShown) {
+            findNavController().navigateSafely(R.id.action_loginFragment_to_boardFragment)
+        }
+    }
+
+    /**
+     * [setupListeners] используется чтобы установить слушатели для каких-либо View или
+     * других элементов пользовательского интерфейса.
+     */
     override fun setupListeners() {
         binding.btnLogin.setOnClickListener {
             login()
         }
     }
-
+    /**
+     * [setupObservers] метод для наблюдания за данными,
+     * получаемыми из ViewModel.
+     */
     override fun setupObservers() {
         subscribeToLoginState()
     }
 
+    /**
+     * [login] Проверяет введенные данные и запускает процесс входа
+    */
     private fun login() = with(binding) {
         if (etEmail.text.isNullOrBlank()) {
             etEmail.error = getString(R.string.enter_email)
@@ -63,7 +80,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layou
             }
         )
     }
-
+    /**
+     * Обрабатывает успешный вход в приложение
+    */
     private fun onSuccessLogin(loginResponse: LoginResponseUI) {
         showToast(getString(R.string.success))
         binding.pbLogin.gone()

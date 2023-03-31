@@ -39,7 +39,12 @@ kotlin = "1.7.20"
 agp = "7.2.2"
 #Dokka
 dokka = "0.9.18"
-
+#Splashscreen
+splashScreen = "1.0.0"
+#Dotsindicator
+dotsindicator = "4.3"
+#Lottie
+lottie = "6.0.0"
 
 [libraries]
 #UIComponents
@@ -49,6 +54,9 @@ uiComponents-androidMaterial = { module = "com.google.android.material:material"
 uiComponents-androidConstraintLayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "androidConstraintLayout" }
 uiComponents-androidxActivity = { module = "androidx.activity:activity-ktx", version.ref = "androidxActivity" }
 uiComponents-androidxFragment = { module = "androidx.fragment:fragment-ktx", version.ref = "androidxFragment" }
+uiComponents-splashScreen = { module = "androidx.core:core-splashscreen", version.ref = "splashScreen" }
+uiComponents-dotsindicator = { module = "com.tbuonomo:dotsindicator", version.ref = "dotsindicator" }
+uiComponents-lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 uiComponents-androidLegacy = { module = "androidx.legacy:legacy-support-v4", version.ref = "androidLegacy" }
 uiComponents-junit = { module = "junit:junit", version.ref = "junit" }
 uiComponents-androidTestJunit = { module = "androidx.test.ext:junit", version.ref = "androidTestJunit" }
@@ -92,14 +100,14 @@ jetBrains-dokka-gradle = { module = "org.jetbrains.dokka:dokka-gradle-plugin", v
 jetBrains-dokka-android-documentation = { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "kotlin" }
 jetBrains-dokka-android-gradle = { module = "org.jetbrains.dokka:dokka-android-gradle-plugin", version.ref = "dokka" }
 
-
 [bundles]
 #UIComponents
 uiComponents = [
     "uiComponents-androidCore", "uiComponents-androidAppCompat",
     "uiComponents-androidMaterial", "uiComponents-androidConstraintLayout",
     "uiComponents-androidxActivity", "uiComponents-androidxFragment",
-    "uiComponents-androidLegacy"
+    "uiComponents-androidLegacy","uiComponents-splashScreen","uiComponents-dotsindicator",
+    "uiComponents-lottie"
 ]
 #NavigationComponent
 navigationComponent = ["navigationComponent-fragment", "navigationComponent-navigationUiKtx"]
@@ -130,4 +138,3 @@ javaLibrary = { id = "java-library" }
 jetBrains-kotlin-gradle = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetBrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 jetBrains-dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
-

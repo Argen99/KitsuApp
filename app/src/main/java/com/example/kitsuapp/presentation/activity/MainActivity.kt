@@ -2,6 +2,7 @@ package com.example.kitsuapp.presentation.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.fragment.NavHostFragment
 import com.example.data.local.prefs.TokenManager
 import com.example.kitsuapp.R
@@ -21,15 +22,14 @@ class MainActivity : AppCompatActivity() {
     private val navController by lazy {
         (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupNavigation()
     }
-
     /**
        *[setupNavigation] Устанавливает начальную точку навигации в зависимости от наличия токена доступа.
        *Если токен доступа отсутствует, значит пользователь не авторизован устанавливает стартовый фрагмент [SignFlowFragment].

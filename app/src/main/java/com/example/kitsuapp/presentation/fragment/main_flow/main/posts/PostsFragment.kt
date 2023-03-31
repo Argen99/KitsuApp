@@ -13,12 +13,13 @@ import com.example.kitsuapp.databinding.FragmentPostsBinding
 import com.example.kitsuapp.model.mappers.toUI
 import com.example.kitsuapp.presentation.adapter.DefaultLoadStateAdapter
 import com.example.kitsuapp.presentation.adapter.PostsPagingAdapter
+import com.example.kitsuapp.presentation.fragment.main_flow.main.anime.AnimeFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 /**
- * [PostsFragment] Фрагмент для чтения постов пользователей
+ * [PostsFragment] PostsFragment наследуется от [BaseFragment], который содержит общую
+ * логику для фрагментов в приложении.В данном фрагменте реализуется отображение списка постов.
  * @author Argen
  * @since 1.0v
  */
@@ -29,7 +30,9 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(R.layou
     private val postsAdapter: PostsPagingAdapter by lazy {
         PostsPagingAdapter(this::onItemClick)
     }
-
+    /**
+     * [initialize] используется для инициализации элементов пользовательского интерфейса.
+     */
     override fun initialize() {
         constructRecycler()
 
@@ -37,11 +40,16 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(R.layou
             binding.pbPosts.isVisible = state.source.refresh is LoadState.Loading
         }
     }
-
+    /**
+     * [setupObservers] метод для наблюдания за данными,
+     * получаемыми из ViewModel.
+     */
     override fun setupObservers() {
         subscribeToPosts()
     }
-
+    /**
+     * [constructRecycler] настраивает RecyclerView с помощью LayoutManager и адаптера.
+    */
     private fun constructRecycler() {
         binding.rvPosts.apply {
             layoutManager =
@@ -67,6 +75,9 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(R.layou
         }
     }
 
+    /**
+     * [onItemClick] В данном методе реализуется отображение тоста с идентификатором элемента списка.
+     */
     private fun onItemClick(id: String) {
         showToast(id)
     }

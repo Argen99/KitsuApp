@@ -9,25 +9,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kitsuapp.databinding.ItemLoaderBinding
 
 /**
- * [DefaultLoadStateAdapter] DefaultLoadStateAdapter для отображения состояния адаптера
+ * [DefaultLoadStateAdapter] DefaultLoadStateAdapter используется для отображения
+ * состояния загрузки в RecyclerView.
  */
 class DefaultLoadStateAdapter(
-) : LoadStateAdapter<DefaultLoadStateAdapter.CharacterLoadStateHolder>() {
+) : LoadStateAdapter<DefaultLoadStateAdapter.DefaultLoadStateHolder>() {
 
-    override fun onBindViewHolder(holder: CharacterLoadStateHolder, loadState: LoadState) {
+    override fun onBindViewHolder(holder: DefaultLoadStateHolder, loadState: LoadState) {
         holder.bind(loadState)
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         loadState: LoadState
-    ): CharacterLoadStateHolder {
+    ): DefaultLoadStateHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemLoaderBinding.inflate(inflater, parent, false)
-        return CharacterLoadStateHolder(binding)
+        return DefaultLoadStateHolder(binding)
     }
 
-    inner class CharacterLoadStateHolder(
+    inner class DefaultLoadStateHolder(
         private val binding: ItemLoaderBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
