@@ -25,11 +25,12 @@ import org.koin.android.ext.android.inject
 class BoardFragment : BaseFragment<FragmentBoardBinding, BaseViewModel>(R.layout.fragment_board) {
     /**
      * Поле [binding] определяет экземпляр класса FragmentBoardBinding, который представляет
-      * макет фрагмента. Поле [viewModel] не используется в данном классе.
+     * макет фрагмента. Поле [viewModel] не используется в данном классе.
      */
     override val binding by viewBinding(FragmentBoardBinding::bind)
     override lateinit var viewModel: BaseViewModel
     private val tokenManager: TokenManager by inject()
+
     /**
      * Метод [initialize] используется для инициализации элементов пользовательского интерфейса.
      * В данном случае, установлен адаптер OnBoardAdapter для ViewPager, а WormDotsIndicator

@@ -10,7 +10,6 @@ import com.example.kitsuapp.core.extension.loadImage
 import com.example.kitsuapp.core.extension.visible
 import com.example.kitsuapp.databinding.ItemPostsBinding
 import com.example.kitsuapp.model.PostsDataUI
-import com.example.kitsuapp.presentation.adapter.AnimePagingAdapter.Companion.diffCallBack
 
 /**
  * Класс [PostsPagingAdapter] является адаптером для пагинации списка постов, который

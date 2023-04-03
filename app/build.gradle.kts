@@ -73,4 +73,6 @@ dependencies {
     implementation(libs.bundles.retrofit)
     // okHttp
     implementation(libs.bundles.okHttp)
+    // Coil
+    implementation(libs.coil.coil)
 }

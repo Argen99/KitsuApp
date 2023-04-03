@@ -2,7 +2,6 @@ package com.example.kitsuapp.presentation.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.fragment.NavHostFragment
 import com.example.data.local.prefs.TokenManager
@@ -22,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private val navController by lazy {
         (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
@@ -31,10 +31,11 @@ class MainActivity : AppCompatActivity() {
 
         setupNavigation()
     }
+
     /**
-       *[setupNavigation] Устанавливает начальную точку навигации в зависимости от наличия токена доступа.
-       *Если токен доступа отсутствует, значит пользователь не авторизован устанавливает стартовый фрагмент [SignFlowFragment].
-       *Если токен доступа существует, значит пользователь авторизован устанавливает стартовый фрагмент как [MainFlowFragment].
+     *[setupNavigation] Устанавливает начальную точку навигации в зависимости от наличия токена доступа.
+     *Если токен доступа отсутствует, значит пользователь не авторизован устанавливает стартовый фрагмент [SignFlowFragment].
+     *Если токен доступа существует, значит пользователь авторизован устанавливает стартовый фрагмент как [MainFlowFragment].
      */
     private fun setupNavigation() {
         val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)

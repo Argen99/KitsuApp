@@ -1,7 +1,6 @@
 package com.example.domain.use_cases
 
 import com.example.domain.repository.AuthRepository
-import com.example.domain.repository.MainRepository
 
 class LoginUseCase(
     private val repository: AuthRepository

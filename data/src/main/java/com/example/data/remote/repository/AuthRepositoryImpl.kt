@@ -8,6 +8,7 @@ import com.example.domain.either.Either
 import com.example.domain.model.LoginResponse
 import com.example.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.Flow
+
 /**
  * Класс [AuthRepositoryImpl] является реализацией интерфейса [AuthRepository].
  * Он использует сервис API [AuthApiService] для выполнения авторизации пользователя.
@@ -22,7 +23,7 @@ class AuthRepositoryImpl(
      * объект Flow<Either<String, LoginResponse>>, который содержит результат
      * выполнения операции авторизации.
      */
-    override fun login(username: String, password: String): Flow<Either<String ,LoginResponse>> =
+    override fun login(username: String, password: String): Flow<Either<String, LoginResponse>> =
         makeNetworkRequest {
             apiService.login(LoginRequestDto(username = username, password = password)).toModel()
         }

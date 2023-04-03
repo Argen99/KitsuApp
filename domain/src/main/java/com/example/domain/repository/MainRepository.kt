@@ -5,5 +5,5 @@ import com.example.domain.model.CategoriesData
 import kotlinx.coroutines.flow.Flow
 
 interface MainRepository {
-    fun getCategories(): Flow<Either<String ,List<CategoriesData>>>
+    fun getCategories(): Flow<Either<String, List<CategoriesData>>>
 }

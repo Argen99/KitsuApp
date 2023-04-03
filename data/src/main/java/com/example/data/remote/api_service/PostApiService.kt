@@ -3,6 +3,7 @@ package com.example.data.remote.api_service
 import com.example.data.remote.model.CreatePostDto
 import com.example.data.remote.model.PostsResponseDto
 import retrofit2.http.*
+
 /**
  * [PostApiService] Api Service для работы с постами
  */

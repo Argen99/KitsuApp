@@ -9,6 +9,7 @@ import com.example.domain.use_cases.GetPostsUseCase
 import com.example.domain.use_cases.GetUserByPostIdUseCase
 import com.example.kitsuapp.core.base.BaseViewModel
 import kotlinx.coroutines.flow.Flow
+
 /**
  * Класс [PostsViewModel] представляет viewModel для [PostsFragment], который содержит две зависимости
  * - getPostsUseCase и getUserByPostIdUseCase. Он также наследует класс [BaseViewModel].
@@ -24,6 +25,7 @@ class PostsViewModel(
     suspend fun getUser(id: String): User {
         return getUserByPostIdUseCase(id)
     }
+
     /**
      * [postsFlow] Возвращает объект Flow<PagingData<PostsData>>, который содержит данные о постах.
      */

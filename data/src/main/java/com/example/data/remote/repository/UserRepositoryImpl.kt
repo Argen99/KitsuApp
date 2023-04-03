@@ -24,7 +24,7 @@ class UserRepositoryImpl(
      * [getUsers] Получить пользователей в виде пагинации
      * @param name имя пользователя для фильтрации
      * @return [Flow] пагинированных данных пользователей
-    */
+     */
     override fun getUsers(name: String?): Flow<PagingData<User>> {
         return Pager(
             config = PagingConfig(
@@ -37,14 +37,16 @@ class UserRepositoryImpl(
             }
         ).flow
     }
+
     /**
      * [getUsersByName] Получить список пользователей с указанным именем
      * @param name имя пользователя для поиска
      * @return [Flow] списка пользователей или ошибки
      */
-    override fun getUsersByName(name: String?): Flow<Either<String, List<User>>> = makeNetworkRequest {
-        apiService.getUsersByName(name).toModel().data
-    }
+    override fun getUsersByName(name: String?): Flow<Either<String, List<User>>> =
+        makeNetworkRequest {
+            apiService.getUsersByName(name).toModel().data
+        }
 
     /**
      * [getUserByPostId] Получить пользователя по идентификатору поста

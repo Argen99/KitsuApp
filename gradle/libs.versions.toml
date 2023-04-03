@@ -12,6 +12,8 @@ androidTestJunit = "1.1.5"
 androidTestEspresso = "3.5.1"
 #Navigation component
 navigationComponent = "2.5.3"
+#Coil
+coil = "2.3.0"
 #Room
 room = "2.4.3"
 #LifeCycle
@@ -48,6 +50,7 @@ lottie = "6.0.0"
 
 [libraries]
 #UIComponents
+coil-coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 uiComponents-androidCore = { module = "androidx.core:core-ktx", version.ref = "androidCore" }
 uiComponents-androidAppCompat = { module = "androidx.appcompat:appcompat", version.ref = "androidAppCompat" }
 uiComponents-androidMaterial = { module = "com.google.android.material:material", version.ref = "androidMaterial" }
@@ -106,7 +109,7 @@ uiComponents = [
     "uiComponents-androidCore", "uiComponents-androidAppCompat",
     "uiComponents-androidMaterial", "uiComponents-androidConstraintLayout",
     "uiComponents-androidxActivity", "uiComponents-androidxFragment",
-    "uiComponents-androidLegacy","uiComponents-splashScreen","uiComponents-dotsindicator",
+    "uiComponents-androidLegacy", "uiComponents-splashScreen", "uiComponents-dotsindicator",
     "uiComponents-lottie"
 ]
 #NavigationComponent

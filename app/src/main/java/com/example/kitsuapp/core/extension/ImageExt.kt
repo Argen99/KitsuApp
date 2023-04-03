@@ -1,8 +1,8 @@
 package com.example.kitsuapp.core.extension
 
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.kitsuapp.R
 
 /**
  * Расширение для загрузки изображения из заданного URL-адреса с помощью библиотеки Glide
@@ -11,5 +11,6 @@ import com.bumptech.glide.Glide
 fun ImageView.loadImage(url: String) {
     Glide.with(this)
         .load(url)
+        .placeholder(R.drawable.place_holder)
         .into(this)
 }

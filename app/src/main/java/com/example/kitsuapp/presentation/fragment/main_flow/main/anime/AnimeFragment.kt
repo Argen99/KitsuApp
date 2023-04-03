@@ -22,6 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 /**
  * [AnimeFragment] AnimeFragment наследуется от [BaseFragment], который содержит общую
  * логику для фрагментов в приложении и представляет собой фрагмент,
@@ -42,6 +43,7 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding, AnimeViewModel>(R.layou
     private val categoriesAdapter: CategoriesAdapter by lazy {
         CategoriesAdapter(categoriesList)
     }
+
     /**
      * [initialize] используется для инициализации элементов пользовательского интерфейса.
      */
@@ -52,6 +54,7 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding, AnimeViewModel>(R.layou
             binding.pbAnime.isVisible = state.source.refresh is LoadState.Loading
         }
     }
+
     /**
      * [setupListeners] используется чтобы установить слушатели для каких-либо View или
      * других элементов пользовательского интерфейса.
@@ -61,6 +64,7 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding, AnimeViewModel>(R.layou
             showBottomSheet()
         }
     }
+
     /**
      * [setupObservers] метод для наблюдания за данными,
      * получаемыми из ViewModel.

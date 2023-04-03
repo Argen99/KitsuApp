@@ -5,6 +5,7 @@ import com.example.data.remote.model.UsersResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+
 /**
  * [UserApiService] Api Service для работы с пользователями
  */

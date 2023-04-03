@@ -6,9 +6,8 @@ import com.example.domain.use_cases.LoginUseCase
 import com.example.kitsuapp.core.base.BaseViewModel
 import com.example.kitsuapp.model.LoginResponseUI
 import com.example.kitsuapp.model.mappers.toUI
-import com.example.kitsuapp.presentation.fragment.main_flow.main.anime.AnimeFragment
-import com.example.kitsuapp.presentation.fragment.main_flow.main.anime.AnimeViewModel
 import kotlinx.coroutines.flow.asStateFlow
+
 /**
  * Класс [LoginViewModel] представляет viewModel для [LoginFragment]. Он принимает
  * два UseCase-класса: [GetAnimeUseCase] для получения списка аниме и [GetCategoriesUseCase]
@@ -24,6 +23,7 @@ class LoginViewModel(
      */
     private val _getLoginState = mutableUiStateFlow<LoginResponseUI>()
     val getLoginState = _getLoginState.asStateFlow()
+
     /**
      * Функция [login] используется входа в приложение.
      * Она принимает username и password в качестве аргумента,

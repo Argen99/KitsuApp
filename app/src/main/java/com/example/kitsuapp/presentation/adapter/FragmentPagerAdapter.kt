@@ -28,7 +28,7 @@ class FragmentPagerAdapter(fragmentActivity: FragmentActivity) :
 
     /**
      * Метод addFragment(fragment: Fragment, title: String) добавляет фрагмент и
-      * соответствующий заголовок в списки.
+     * соответствующий заголовок в списки.
      */
     fun addFragment(fragment: Fragment, title: String) {
         fragmentList.add(fragment)

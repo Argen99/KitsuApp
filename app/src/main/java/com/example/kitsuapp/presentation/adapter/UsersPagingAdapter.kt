@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kitsuapp.core.extension.loadImage
-import com.example.kitsuapp.databinding.ItemUsersBinding
+import coil.load
+import com.example.kitsuapp.R
+import com.example.kitsuapp.core.extension.gone
+import com.example.kitsuapp.core.extension.visible
+import com.example.kitsuapp.databinding.ItemUserBinding
 import com.example.kitsuapp.model.UserUI
-import com.example.kitsuapp.presentation.adapter.AnimePagingAdapter.Companion.diffCallBack
-import com.example.kitsuapp.presentation.fragment.main_flow.create_post.CreatePostFragment
 
 /**
  * Класс [AnimePagingAdapter] является адаптером для RecyclerView, который используется
@@ -23,7 +24,7 @@ class UsersPagingAdapter(
 ) : PagingDataAdapter<UserUI, UsersPagingAdapter.UsersViewHolder>(diffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = UsersViewHolder(
-        ItemUsersBinding.inflate(
+        ItemUserBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
     )
@@ -32,12 +33,20 @@ class UsersPagingAdapter(
         getItem(position)?.let { holder.onBind(it) }
     }
 
-    inner class UsersViewHolder(private val binding: ItemUsersBinding) :
+    inner class UsersViewHolder(private val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
         fun onBind(data: UserUI) = with(binding) {
-            data.attributes?.avatar?.original?.let { ivUserAvatar.loadImage(it) }
+            pbUser.visible()
+            data.attributes?.avatar?.original?.let {
+                ivUserAvatar.load(it) {
+                    placeholder(R.drawable.place_holder)
+                    listener { _, _ ->
+                        pbUser.gone()
+                    }
+                }
+            }
             data.attributes?.name?.let { tvUserName.text = it }
             data.attributes?.followersCount?.let { tvUserFollowers.text = "$it followers" }
             tvUserName.text = data.attributes!!.name!!

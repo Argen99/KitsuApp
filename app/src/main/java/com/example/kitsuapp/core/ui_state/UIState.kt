@@ -10,14 +10,17 @@ sealed class UIState<T> {
      * интерфейс находится в неактивном состоянии.
      */
     class Idle<T> : UIState<T>()
+
     /**
      * [Loading] Loading - класс, представляющий состояние загрузки.
      */
     class Loading<T> : UIState<T>()
+
     /**
      * [Error] Error - класс, представляющий состояние ошибки.
      */
     class Error<T>(val error: String) : UIState<T>()
+
     /**
      * [Success] Success - класс, представляющий состояние успешного выполнения.
      */

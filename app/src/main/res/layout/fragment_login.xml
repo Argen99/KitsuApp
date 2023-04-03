@@ -63,12 +63,13 @@
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white2"
                 android:layout_marginHorizontal="16dp"
                 android:background="@drawable/bg_et_login"
                 android:hint="@string/email"
+                android:textColorHint="@color/gray"
                 android:maxLength="40"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:textColor="@color/gray" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,12 +84,13 @@
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white2"
                 android:layout_marginHorizontal="16dp"
                 android:background="@drawable/bg_et_login"
                 android:hint="@string/password"
                 android:maxLength="40"
-                android:maxLines="1" />
+                android:textColorHint="@color/gray"
+                android:maxLines="1"
+                android:textColor="@color/gray" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

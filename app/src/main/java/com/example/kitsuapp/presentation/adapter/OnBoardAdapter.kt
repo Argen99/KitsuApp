@@ -18,10 +18,10 @@ class OnBoardAdapter(private val context: Context) : Adapter<OnBoardAdapter.OnBo
 
     /**
      * Адаптер содержит список [list] OnBoardUI, каждый элемент которого содержит заголовок,
-    * описание и изображение. Каждый элемент списка отображается на своей странице ViewPager.
-    * Когда пользователь листает страницы ViewPager, внутренний слушатель OnPageChangeCallback
-    * изменяет видимость кнопок в зависимости от текущей страницы. Кнопка "Next" скрывается
-    * на последней странице, а кнопка "Start" становится видимой только на последней странице.
+     * описание и изображение. Каждый элемент списка отображается на своей странице ViewPager.
+     * Когда пользователь листает страницы ViewPager, внутренний слушатель OnPageChangeCallback
+     * изменяет видимость кнопок в зависимости от текущей страницы. Кнопка "Next" скрывается
+     * на последней странице, а кнопка "Start" становится видимой только на последней странице.
      */
     private val list = listOf(
         OnBoardUI(
@@ -48,13 +48,13 @@ class OnBoardAdapter(private val context: Context) : Adapter<OnBoardAdapter.OnBo
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: OnBoardViewHolder, position: Int) {
-        holder.onBind(list[position] ,position)
+        holder.onBind(list[position], position)
     }
 
     inner class OnBoardViewHolder(private val binding: PagerBoardBinding) :
         ViewHolder(binding.root) {
 
-        fun onBind(model: OnBoardUI,position: Int) = with(binding) {
+        fun onBind(model: OnBoardUI, position: Int) = with(binding) {
             image.setImageResource(model.image)
             if (position == 0) {
                 pagerContainer.setBackgroundColor(context.getColor(R.color.black))

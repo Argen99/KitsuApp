@@ -43,6 +43,7 @@ class MangaFragment : BaseFragment<FragmentMangaBinding, MangaViewModel>(R.layou
     private val categoriesAdapter: CategoriesAdapter by lazy {
         CategoriesAdapter(categoriesList)
     }
+
     /**
      * [initialize] используется для инициализации элементов пользовательского интерфейса.
      */
@@ -66,6 +67,7 @@ class MangaFragment : BaseFragment<FragmentMangaBinding, MangaViewModel>(R.layou
             viewModel.searchBy(it.toString())
         }
     }
+
     /**
      * [setupListeners] используется чтобы установить слушатели для каких-либо View или
      * других элементов пользовательского интерфейса.
@@ -75,9 +77,10 @@ class MangaFragment : BaseFragment<FragmentMangaBinding, MangaViewModel>(R.layou
             showBottomSheet()
         }
     }
+
     /**
      * [constructRecycler] настраивает RecyclerView с помощью LayoutManager и адаптера.
-    */
+     */
     private fun constructRecycler() {
         binding.rvManga.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)

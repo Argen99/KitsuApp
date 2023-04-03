@@ -3,15 +3,14 @@ package com.example.kitsuapp.di
 import com.example.data.core.utils.AuthInterceptor
 import com.example.data.local.prefs.TokenManager
 import com.example.data.remote.api_service.*
-import com.example.domain.repository.UserRepository
 import com.example.kitsuapp.BuildConfig.BASE_URL
-import com.example.kitsuapp.presentation.fragment.main_flow.create_post.CreatePostFragment
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+
 /**
  * [networkModule] networkModule
  */

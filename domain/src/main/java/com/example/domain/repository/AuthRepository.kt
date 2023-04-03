@@ -5,5 +5,5 @@ import com.example.domain.model.LoginResponse
 import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
-    fun login(username: String, password: String): Flow<Either<String,LoginResponse>>
+    fun login(username: String, password: String): Flow<Either<String, LoginResponse>>
 }

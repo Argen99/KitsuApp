@@ -6,7 +6,6 @@ import com.example.kitsuapp.R
 import com.example.kitsuapp.core.base.BaseFragment
 import com.example.kitsuapp.databinding.FragmentMainBinding
 import com.example.kitsuapp.presentation.adapter.FragmentPagerAdapter
-import com.example.kitsuapp.presentation.fragment.main_flow.create_post.CreatePostFragment
 import com.example.kitsuapp.presentation.fragment.main_flow.main.anime.AnimeFragment
 import com.example.kitsuapp.presentation.fragment.main_flow.main.manga.MangaFragment
 import com.example.kitsuapp.presentation.fragment.main_flow.main.posts.PostsFragment
@@ -24,6 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(R.layout.fragment_main) {
     /** Экземпляр binding для макета этого фрагмента. */
     override val binding by viewBinding(FragmentMainBinding::bind)
+
     /** Экземпляр view model для этого фрагмента. */
     override val viewModel by viewModel<MainViewModel>()
 

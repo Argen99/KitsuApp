@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
     fun getUsers(name: String?): Flow<PagingData<User>>
-    fun getUsersByName(name: String?): Flow<Either<String,List<User>>>
+    fun getUsersByName(name: String?): Flow<Either<String, List<User>>>
     suspend fun getUserByPostId(id: String): User
 }

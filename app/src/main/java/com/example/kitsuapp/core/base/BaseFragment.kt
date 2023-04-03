@@ -3,8 +3,6 @@ package com.example.kitsuapp.core.base
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
-import androidx.constraintlayout.widget.Group
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,7 +10,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.PagingData
 import androidx.viewbinding.ViewBinding
 import com.example.kitsuapp.core.ui_state.UIState
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -43,17 +40,20 @@ abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel>(
      * в наследниках, чтобы инициализировать какие-либо необходимые данные или переменные.
      */
     protected open fun initialize() {}
+
     /**
      * [setupRequest] метод, который вызывается после инициализации и может быть переопределен в
      * наследниках, чтобы установить какие-либо запросы к серверу или базе данных.
      */
     protected open fun setupRequest() {}
+
     /**
      * [setupObservers] setupObservers() - метод, который вызывается после установки слушателей
      * и может быть переопределен в наследниках, чтобы установить наблюдателей за данными,
      * получаемыми из ViewModel или других источников.
      */
     protected open fun setupObservers() {}
+
     /**
      * [setupListeners] метод, который вызывается после установки запросов и может быть переопределен
      * в наследниках, чтобы установить слушатели для каких-либо View или других элементов

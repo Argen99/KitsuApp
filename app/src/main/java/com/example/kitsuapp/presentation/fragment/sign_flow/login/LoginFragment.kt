@@ -8,7 +8,6 @@ import com.example.kitsuapp.core.base.BaseFragment
 import com.example.kitsuapp.core.extension.*
 import com.example.kitsuapp.databinding.FragmentLoginBinding
 import com.example.kitsuapp.model.LoginResponseUI
-import com.example.kitsuapp.presentation.fragment.main_flow.main.MainFragment
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,6 +37,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layou
             login()
         }
     }
+
     /**
      * [setupObservers] метод для наблюдания за данными,
      * получаемыми из ViewModel.
@@ -48,7 +48,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layou
 
     /**
      * [login] Проверяет введенные данные и запускает процесс входа
-    */
+     */
     private fun login() = with(binding) {
         if (etEmail.text.isNullOrBlank()) {
             etEmail.error = getString(R.string.enter_email)
@@ -80,9 +80,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layou
             }
         )
     }
+
     /**
      * Обрабатывает успешный вход в приложение
-    */
+     */
     private fun onSuccessLogin(loginResponse: LoginResponseUI) {
         showToast(getString(R.string.success))
         binding.pbLogin.gone()

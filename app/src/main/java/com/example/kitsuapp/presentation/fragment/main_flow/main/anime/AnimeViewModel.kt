@@ -3,22 +3,20 @@ package com.example.kitsuapp.presentation.fragment.main_flow.main.anime
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.domain.model.CategoriesData
 import com.example.domain.model.Data
 import com.example.domain.use_cases.GetAnimeUseCase
 import com.example.domain.use_cases.GetCategoriesUseCase
 import com.example.kitsuapp.core.base.BaseViewModel
-import com.example.kitsuapp.core.ui_state.UIState
 import com.example.kitsuapp.model.CategoriesDataUI
 import com.example.kitsuapp.model.mappers.toUI
-import com.example.kitsuapp.presentation.fragment.main_flow.main.manga.MangaViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
+
 /**
  * Класс [AnimeViewModel] представляет viewModel для [AnimeFragment]. Он принимает
-  * два UseCase-класса: [GetAnimeUseCase] для получения списка аниме и [GetCategoriesUseCase]
-  * для получения списка категорий.
+ * два UseCase-класса: [GetAnimeUseCase] для получения списка аниме и [GetCategoriesUseCase]
+ * для получения списка категорий.
  */
 @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
 class AnimeViewModel(
@@ -28,11 +26,11 @@ class AnimeViewModel(
 
     /**
      * AnimeViewModel имеет два MutableStateFlow поля: [searchByS] и [filterByS], которые используются
-      * для поиска и фильтрации аниме соответственно. Эти поля изменяются через
-      * методы [searchBy] и [filterBy].
+     * для поиска и фильтрации аниме соответственно. Эти поля изменяются через
+     * методы [searchBy] и [filterBy].
      * Кроме того, класс имеет Flow<PagingData<Data>> поле [animeFlow], которое используется
-      * для передачи списка аниме в пользовательский интерфейс. При изменении поля searchBy
-      * или filterBy animeFlow перезапрашивается с помощью метода getAnimeUseCase.invoke().
+     * для передачи списка аниме в пользовательский интерфейс. При изменении поля searchBy
+     * или filterBy animeFlow перезапрашивается с помощью метода getAnimeUseCase.invoke().
      */
     val animeFlow: Flow<PagingData<Data>>
     private val searchByS = MutableStateFlow("")
@@ -40,7 +38,7 @@ class AnimeViewModel(
 
     /**
      * Класс также имеет поле [getCategoriesState], которое содержит список категорий аниме,
-      * полученный с помощью метода [getCategoriesUseCase].
+     * полученный с помощью метода [getCategoriesUseCase].
      */
     private val _getCategoriesState = mutableUiStateFlow<List<CategoriesDataUI>>()
     val getCategoriesState = _getCategoriesState.asStateFlow()
@@ -79,8 +77,9 @@ class AnimeViewModel(
                     .cachedIn(viewModelScope)
             }
         }
-        getCategoriesUseCase().gatherRequest(_getCategoriesState) {data -> data.map { it.toUI() }}
+        getCategoriesUseCase().gatherRequest(_getCategoriesState) { data -> data.map { it.toUI() } }
     }
+
     /**
      * [searchBy] Метод для передачи аргументов поиска
      */
@@ -90,6 +89,7 @@ class AnimeViewModel(
             searchByS.value = value
         }
     }
+
     /**
      * [searchBy] Метод для передачи аргументов поиска.
      */

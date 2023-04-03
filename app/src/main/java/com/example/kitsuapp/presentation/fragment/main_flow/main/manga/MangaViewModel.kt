@@ -12,6 +12,7 @@ import com.example.kitsuapp.model.mappers.toUI
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
+
 /**
  * Класс [MangaViewModel] представляет viewModel для  [MangaFragment]. Он принимает
  * два UseCase-класса: [getMangaUseCase] для получения списка манга и [getCategoriesUseCase]
@@ -38,7 +39,7 @@ class MangaViewModel(
     /**
      * Класс также имеет поле [getCategoriesState], которое содержит список категорий аниме,
      * полученный с помощью метода [getCategoriesUseCase].
-    */
+     */
     private val _getCategoriesState = mutableUiStateFlow<List<CategoriesDataUI>>()
     val getCategoriesState = _getCategoriesState.asStateFlow()
 
@@ -78,6 +79,7 @@ class MangaViewModel(
         }
         getCategoriesUseCase().gatherRequest(_getCategoriesState) { data -> data.map { it.toUI() } }
     }
+
     /**
      * [searchBy] Метод для передачи аргументов поиска
      */
@@ -85,6 +87,7 @@ class MangaViewModel(
         if (searchByS.value == value) return
         searchByS.value = value
     }
+
     /**
      * [searchBy] Метод для передачи аргументов поиска.
      */

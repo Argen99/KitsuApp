@@ -2,10 +2,10 @@ package com.example.data.remote.paging_src
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.data.remote.api_service.AnimeApiService
 import com.example.data.remote.api_service.MangaApiService
 import com.example.data.remote.model.mappers.toModel
 import com.example.domain.model.Data
+
 /**
  * Класс [MangaPagingSource] реализует PagingSource, который является источником данных для
  * PagingData. Он загружает страницы данных из сервера и конвертирует их в Data объекты.
@@ -39,6 +39,7 @@ class MangaPagingSource(
             LoadResult.Error(exception)
         }
     }
+
     /**
      * Метод [getRefreshKey] возвращает ключ для обновления данных. Он используется, когда пользователь
      * перезагружает список данных, чтобы обновить его. Возвращает ключ последней загруженной страницы.

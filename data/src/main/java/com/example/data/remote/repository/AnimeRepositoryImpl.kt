@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.Flow
  */
 class AnimeRepositoryImpl(
     private val apiService: AnimeApiService
-): AnimeRepository {
+) : AnimeRepository {
     /**
      * Метод [getAnime] возвращает объект Flow<PagingData<Data>> для постраничного
      * получения данных об аниме. Он использует объект Pager для настройки параметров

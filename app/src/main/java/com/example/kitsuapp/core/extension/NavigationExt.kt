@@ -14,7 +14,7 @@ import com.example.kitsuapp.R
 fun Fragment.activityNavController() = requireActivity().findNavController(R.id.nav_host_fragment)
 
 /**
- [navigateSafely] extension для безопасной навигации
+[navigateSafely] extension для безопасной навигации
  */
 fun NavController.navigateSafely(@IdRes actionId: Int) {
     currentDestination?.getAction(actionId)?.let { navigate(actionId) }
