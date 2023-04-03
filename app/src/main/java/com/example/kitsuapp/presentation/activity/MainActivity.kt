@@ -2,12 +2,12 @@ package com.example.kitsuapp.presentation.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.fragment.NavHostFragment
 import com.example.data.local.prefs.TokenManager
 import com.example.kitsuapp.R
 import com.example.kitsuapp.databinding.ActivityMainBinding
-import com.example.kitsuapp.presentation.fragment.main_flow.create_post.CreatePostFragment
 import org.koin.android.ext.android.inject
 
 /**
@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
